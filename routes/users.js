@@ -8,6 +8,8 @@ router.get('/signup' , usersController.signUp);
 router.get('/signin' , usersController.signIn);
 router.get('/profile' , usersController.profile);
 router.get('/posts' , usersController.posts);
+router.post('/create-session' , usersController.createSession);
+router.post('/create' , usersController.create);
 
 
 

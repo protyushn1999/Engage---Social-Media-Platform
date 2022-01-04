@@ -1,1 +1,12 @@
 <h1>Sign Up</h1>
+
+<!-- creating a sign up page for new user -->
+
+<form action= "/users/create" method = "POST">
+    <input type="name" name="name" placeholder="Name" required>
+    <input type="email" name="email" placeholder="Email Address" required>
+    <input type="password" name="password" placeholder="Password" required>
+    <input type="password" name="confirm_password" placeholder="Confirm Password" required>
+
+    <button type="submit">Sign Up</button>
+</form>
