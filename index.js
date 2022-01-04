@@ -8,6 +8,7 @@ app.use(express.static('./assets'));
 
 //using the express layouts for the layout
 app.use(expressLayouts);
+
 //extract styles and scripts from sub pages into the layout
 app.set('layout extractStyles', true);
 app.set('layout extractScripts', true);
@@ -19,6 +20,7 @@ app.use('/', require('./routes'));
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
+//setting up the server
 app.listen(port, function(err) {
     if(err) {
         console.log(`Error in setting up the server: ${err}`);
