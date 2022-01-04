@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const port = 8000;
 const expressLayouts = require('express-ejs-layouts');
+const db = require('./config/mongoose');
 
 app.use(express.static('./assets'));
 
@@ -11,7 +12,7 @@ app.use(expressLayouts);
 app.set('layout extractStyles', true);
 app.set('layout extractScripts', true);
 
-
+//setting the routes ==>  it means that all the '/' webpage will be redirect to ./routes folder
 app.use('/', require('./routes'));
 
 //setting up the view engine
