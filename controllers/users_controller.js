@@ -2,14 +2,21 @@ const userDataBase = require('../models/user');
 
 // render the sign up page
 module.exports.signUp = function(req,res) {
-    return res.render('user_sign_up',{
+  if(req.isAuthenticated()) {
+    return res.redirect('/users/profile');
+  }
+  
+  return res.render('user_sign_up',{
         title: 'Socialley Sign Up'
     })
 }
 
 // render the sign in page
 module.exports.signIn = function(req,res) {
-    return res.render('user_sign_in',{
+  if(req.isAuthenticated()) {
+    return res.redirect('/users/profile');
+  }  
+  return res.render('user_sign_in',{
         title: 'Socialley Sign In'
     })
 }
@@ -46,7 +53,7 @@ module.exports.create = function(req,res) {
 }
 //get the log in data and create a new session for the user
 module.exports.createSession = function(req,res) {
-    //todo later
+    return res.redirect('/users/profile');
 }
 
 // render the profile page
