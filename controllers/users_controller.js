@@ -53,7 +53,7 @@ module.exports.create = function(req,res) {
 }
 //get the log in data and create a new session for the user
 module.exports.createSession = function(req,res) {
-    return res.redirect('/users/profile');
+    return res.redirect('/');
 }
 
 // render the profile page
@@ -67,4 +67,10 @@ module.exports.profile = function(req,res) {
 // render the posts page
 module.exports.posts = function(req,res) {
     return res.end('<h1>User Posts</h1>');
+}
+
+// logout the user and redirect to the sign in page
+module.exports.destroySession = function(req,res) {
+    req.logout();
+    return res.redirect('/');
 }
