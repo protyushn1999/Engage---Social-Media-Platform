@@ -1,4 +1,5 @@
 const userDataBase = require('../models/user');
+const postDataBase = require('../models/posts');
 
 // render the sign up page
 module.exports.signUp = function(req,res) {
@@ -40,7 +41,7 @@ module.exports.create = function(req,res) {
             }, function(err,userDetails) {
                 if(err) {
                     console.log('Error in creating a new user'); 
-                    return res.redirect('/');;
+                    return res.redirect('/');
                 }
                 console.log('*********' , userDetails);
                 return res.redirect('/users/signin');
@@ -67,18 +68,77 @@ module.exports.profile = function(req,res) {
 }
 
 // render the posts page
-module.exports.posts = function(req,res) {
-    if(req.isAuthenticated()) {
+// module.exports.posts = function(req,res) {
+//     if(req.isAuthenticated()) {
 
-    return res.render('user_posts',{
-        title: 'User Posts'
+//     return res.render('user_posts',{
+//         title: 'User Posts'
+//     })
+// }
+// return res.redirect('/');
+// }
+
+//populate the  post page with the posts of the user
+// module.exports.posts = function(req,res) {
+//     postDataBase.find({}).populate('users').exec(function(err, posts) {
+//         if(err) {
+//             console.log('error in finding the posts');
+//             return;
+//         }
+//         return res.render('user_posts',{
+//             title: 'User Posts',
+//             posts: posts
+//         })
+//     })
+// }
+ module.exports.posts = function(req,res) {
+    postDataBase.find({user: req.user._id}, function(err,posts) {
+
+        if(err) { 
+            console.log('Error in finding the posts');
+            return;
+        }
+
+        return res.render('user_posts',{
+            title: 'User Posts',
+            posts: posts
+        })
     })
 }
-return res.redirect('/');
-}
+
+// module.exports.post = function(req,res) {
+//     portDatabase.find({}).populate('user').exec(function(err,posts) {
+//         if(err) {
+//             console.log('error in fetching the posts');
+//             return;
+//         }
+//         return res.render('user_posts',{
+//             title: 'User Posts',
+//             posts: posts
+//         })
+//     })
+// }
+
+// module.exports.post = function(req,res) {
+//     postDataBase.find({user: req.user._id}).populate('user').exec(function(err,posts) {
+//         if(err) {
+//             console.log('error in fetching the posts');
+//             return;
+//         }
+//         return res.render('user_posts',{
+//             title: 'User Posts',
+//             posts: posts
+//         })
+//     })
+// }
+
+
+
+
 
 // logout the user and redirect to the sign in page
 module.exports.destroySession = function(req,res) {
     req.logout();
     return res.redirect('/');
 }
+
