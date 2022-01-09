@@ -1,40 +1,41 @@
-<header>
-    page header
-    
-    <ul>
-        <% if(locals.user) { %>
-        <li>
-            <a href = "/users/profile" >
-                <%= locals.user.name%>
-            </a>
-           
-        </li>
-        <li>
-            <button>
-                <a href = "/users/signout">
-                    Sign Out
+<div class="row header">
+    <div class="col-md-4">
+        <img src="https://png.pngtree.com/element_our/png_detail/20181229/vector-chat-icon-png_302635.jpg" alt="" width="50" height="50">
+        The Social Club
+    </div>
+    <div class="col-md-8">
+        <ul>
+            <% if(locals.user) { %>
+            <li>
+                <a href = "/users/posts" >
+                    <%= locals.user.name%>
                 </a>
-            </button>
-        </li>
- 
-        <% } else { %>
-            <li>
-                <button>
-                    <a href = "/users/signin">
-                        Sign In
-                    </a>
-                </button>
+               
             </li>
             <li>
                 <button>
-                    <a href = "/users/signup">
-                        Sign Up
+                    <a href = "/users/signout">
+                        Sign Out
                     </a>
                 </button>
             </li>
-
-
-        <% } %>
-    </ul>
-
-</header>
+            <% } else { %>
+                <li>
+                    <button>
+                        <a href = "/users/signin">
+                            Log in to Engage
+                        </a>
+                    </button>
+                </li>
+                <li>
+                    <button>
+                        <a href = "/">
+                            Create New Account
+                        </a>
+                    </button>
+                </li>
+    
+            <% } %>
+        </ul>
+    </div>
+</div>

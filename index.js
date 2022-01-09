@@ -1,7 +1,7 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const app = express();
-const port = 8000;
+const port = 7000;
 const expressLayouts = require('express-ejs-layouts');
 const db = require('./config/mongoose');
 //used for session cookies
@@ -9,6 +9,19 @@ const session = require('express-session');
 const passport = require('passport');
 const passportLocal = require('./config/passport-local');
 const MongoStore = require('connect-mongo');
+//const sass = require('node-sass');
+
+
+//use sass to compile scss to css
+// sass.render({
+//     file: './assets/scss/style.scss',
+//     outFile: './assets/css/style.css'
+// }, function(err, result) {
+//     if (err) {
+//         console.log(err);
+//     }
+// });
+
 
 //setting the middlewares
 app.use(express.urlencoded());
@@ -21,7 +34,7 @@ app.use(expressLayouts);
 //extract styles and scripts from sub pages into the layout
 app.set('layout extractStyles', true);
 app.set('layout extractScripts', true);
-
+ 
 //setting up the view engine
 app.set('view engine', 'ejs');
 app.set('views', './views');
@@ -46,10 +59,13 @@ app.use(session({
     )
 }));
 
-// initialize passport and session
-app.use(passport.initialize());
-app.use(passport.session());
+// initialize passport and session middleware
 
+//passport.initialize() is used to initialize the passport middleware
+app.use(passport.initialize());
+//passport.session() is used to initialize the session
+app.use(passport.session());
+//passport.setAuthenticatedUser() is used to set the user in the session and store it in the locals
 app.use(passport.setAuthenticatedUser);
 
 //setting the routes ==>  it means that all the '/' webpage will be redirect to ./routes folder

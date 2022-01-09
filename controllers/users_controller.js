@@ -24,12 +24,13 @@ module.exports.signIn = function(req,res) {
 //get the sign up data and create a new contact
 module.exports.create = function(req,res) {
     if(req.body.password != req.body.confirm_password) {
-        return res.redirect('back');
+        return res.redirect('/');
     }
 
     userDataBase.findOne({email: req.body.email}, function(err, user) {
         if(err) {
-            console.log('error in finding the user in signing up');  return;
+            console.log('error in finding the user in signing up');  
+            return res.redirect('/');
         }
         if(!user) {
             userDataBase.create({
@@ -38,14 +39,15 @@ module.exports.create = function(req,res) {
                 name: req.body.name
             }, function(err,userDetails) {
                 if(err) {
-                    console.log('Error in creating a new user'); return;
+                    console.log('Error in creating a new user'); 
+                    return res.redirect('/');;
                 }
                 console.log('*********' , userDetails);
                 return res.redirect('/users/signin');
             });
         }
         else {
-            return res.redirect('back');
+            return res.redirect('/');
         }
 
     
@@ -53,7 +55,7 @@ module.exports.create = function(req,res) {
 }
 //get the log in data and create a new session for the user
 module.exports.createSession = function(req,res) {
-    return res.redirect('/');
+    return res.redirect('/users/profile');
 }
 
 // render the profile page

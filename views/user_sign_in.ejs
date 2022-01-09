@@ -1,12 +1,24 @@
-<h1>Sign In</h1>
-
-<form action = "/users/create-session" method= "POST">
-    <input type="email" name="email" placeholder="Email Address" required>
-    <input type="password" name="password" placeholder="Password" required>
-    
-
-    <button type="submit">Log In</button>
-    <button type="submit">
-        <a href="./signup">Create New Account</a>
-    </button>
-</form>
+<link rel="stylesheet" href="/css/user_sign_in.css">
+<div class="row signin-body">
+    <div class="col-md-12">
+        <h2>Log In to Engage</h2>
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4 design-form">
+                <form action = "/users/create-session" method= "POST">
+                    <div class="mb-3">
+                      <input type="email" class="form-control" name="email" placeholder="Email Address" required>
+                      <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                      
+                    </div>
+                    <div class="mb-4">
+                        <input type="password" class="form-control" name="password" placeholder="Password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Log In</button>
+                  </form>
+            </div>
+            <div class="col-md-5"></div>
+        </div>
+        
+    </div>
+</div>
