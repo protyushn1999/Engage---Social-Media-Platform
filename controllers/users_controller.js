@@ -68,7 +68,13 @@ module.exports.profile = function(req,res) {
 
 // render the posts page
 module.exports.posts = function(req,res) {
-    return res.end('<h1>User Posts</h1>');
+    if(req.isAuthenticated()) {
+
+    return res.render('user_posts',{
+        title: 'User Posts'
+    })
+}
+return res.redirect('/');
 }
 
 // logout the user and redirect to the sign in page
