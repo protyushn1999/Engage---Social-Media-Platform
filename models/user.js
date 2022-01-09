@@ -17,7 +17,7 @@ const userSchema = new mongoose.Schema({
 }, {
     timestamps: true
 });
-
+// const name of thing that will help to export it = mongoose.nodel('name of the model', name of the schema it follows);
 const users = mongoose.model('users', userSchema);
 
 module.exports = users;
