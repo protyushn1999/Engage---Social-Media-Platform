@@ -68,29 +68,7 @@ module.exports.profile = function(req,res) {
 }
 
 // render the posts page
-// module.exports.posts = function(req,res) {
-//     if(req.isAuthenticated()) {
 
-//     return res.render('user_posts',{
-//         title: 'User Posts'
-//     })
-// }
-// return res.redirect('/');
-// }
-
-//populate the  post page with the posts of the user
-// module.exports.posts = function(req,res) {
-//     postDataBase.find({}).populate('users').exec(function(err, posts) {
-//         if(err) {
-//             console.log('error in finding the posts');
-//             return;
-//         }
-//         return res.render('user_posts',{
-//             title: 'User Posts',
-//             posts: posts
-//         })
-//     })
-// }
 //  module.exports.posts = function(req,res) {
 //     postDataBase.find({}, function(err,posts) {
 
@@ -107,7 +85,17 @@ module.exports.profile = function(req,res) {
 // }
 
 module.exports.posts = function(req,res) {
-    postDataBase.find({}).populate('user').exec(function(err,posts) {
+    postDataBase.find({})
+    .populate('user')
+    //populating the comments and the user of the comments
+    .populate({
+        path : 'comments',
+        populate : {
+            path: 'user'
+        }
+    })
+    
+    .exec(function(err,posts) {
         if(err) {
             console.log('error in fetching the posts');
             return;
@@ -118,31 +106,6 @@ module.exports.posts = function(req,res) {
         })
     })
 }
-
-// module.exports.post = function(req,res) {
-//     postDataBase.find({user: req.user._id}).populate('user').exec(function(err,posts) {
-//         if(err) {
-//             console.log('error in fetching the posts');
-//             return;
-//         }
-//         return res.render('user_posts',{
-//             title: 'User Posts',
-//             posts: posts
-//         })
-//     })
-// }
-
-// module.exports.posts = function(req,res) {
-
-//     postDataBase.find({}).populate('user').exec(function(err,posts) { 
-//         console.log(posts);
-//         return res.render('user_posts',{
-//             title: 'User Posts',
-//             posts: posts
-//         });
-//     })
-// }
-
 
 
 // logout the user and redirect to the sign in page
