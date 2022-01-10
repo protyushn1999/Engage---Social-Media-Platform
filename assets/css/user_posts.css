@@ -43,13 +43,11 @@
     display: none;
   }
 .main-post{
-    background-color: rgb(255, 255, 255);
     background-color: var(--primary);
     border-radius: 25px;
 }
 .post-btn{
     border: none;
-    background-color: green;
     background-color: var(--secondary);
 }
 .post-btn:hover{
@@ -68,4 +66,14 @@
 }
 .main-post-btn:hover{
     background-color: #712156;
+}
+.each-post{
+    background-color: var(--primary);
+    border-radius: 25px;
+    padding: 1em 0em;
+}
+.lcs{
+    width: 10em;
+    font-size: small;
+    font-weight: 600;
 }

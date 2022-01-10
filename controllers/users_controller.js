@@ -91,33 +91,33 @@ module.exports.profile = function(req,res) {
 //         })
 //     })
 // }
- module.exports.posts = function(req,res) {
-    postDataBase.find({user: req.user._id}, function(err,posts) {
+//  module.exports.posts = function(req,res) {
+//     postDataBase.find({}, function(err,posts) {
 
-        if(err) { 
-            console.log('Error in finding the posts');
-            return;
-        }
-
-        return res.render('user_posts',{
-            title: 'User Posts',
-            posts: posts
-        })
-    })
-}
-
-// module.exports.post = function(req,res) {
-//     portDatabase.find({}).populate('user').exec(function(err,posts) {
-//         if(err) {
-//             console.log('error in fetching the posts');
+//         if(err) { 
+//             console.log('Error in finding the posts');
 //             return;
 //         }
+
 //         return res.render('user_posts',{
 //             title: 'User Posts',
 //             posts: posts
 //         })
 //     })
 // }
+
+module.exports.posts = function(req,res) {
+    postDataBase.find({}).populate('user').exec(function(err,posts) {
+        if(err) {
+            console.log('error in fetching the posts');
+            return;
+        }
+        return res.render('user_posts',{
+            title: 'User Posts',
+            posts: posts,
+        })
+    })
+}
 
 // module.exports.post = function(req,res) {
 //     postDataBase.find({user: req.user._id}).populate('user').exec(function(err,posts) {
@@ -132,7 +132,16 @@ module.exports.profile = function(req,res) {
 //     })
 // }
 
+// module.exports.posts = function(req,res) {
 
+//     postDataBase.find({}).populate('user').exec(function(err,posts) { 
+//         console.log(posts);
+//         return res.render('user_posts',{
+//             title: 'User Posts',
+//             posts: posts
+//         });
+//     })
+// }
 
 
 

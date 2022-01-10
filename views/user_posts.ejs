@@ -34,7 +34,7 @@
                 <form action="/users/posts/createpost" method="POST" id = "postfeed">
                     <div class="form-floating">
                         <textarea class="form-control feed-post"name="feed_post" placeholder="Leave a comment here" id="feed-post"></textarea>
-                        <label for="floatingTextarea"> What's on your mind <%= user.name%>?</label>
+                        <label for="floatingTextarea"> What's on your mind <%= post.user.name%>?</label>
                       </div>
                       <div class="col-12">
                         <button type="submit" class="btn btn-primary btn-lg main-post-btn">Post</button>
@@ -56,21 +56,68 @@
             </div>
             Hello from posts
         </div>
+
+        <br>
+
+        <% for(post of posts) {%>
+        <div class="row each-post">
+            <div class="col-md-12 ">
+                <div class="row">
+                    <div class="col-md-2">
+                        <img src="https://cdn.dribbble.com/users/146798/screenshots/6327584/panda-dribbble_4x.jpg?compress=1&resize=1600x1200&vertical=top" class="rounded-circle" alt="Cinque Terre" width="50" height="50">
+                    </div>
+                    <div class="col-md-10 text-start">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h6><%= post.user.name%></h6>
+                            </div>
+                            <div class="col-md-12">
+                                <p><%= post.createdAt%></p>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+        
+                <div class="row">
+                    <div class="col-md-12 p-4 text-start">
+                        <p class="p-4"><%= post.content%></p>
+                    </div>
+                </div> 
+        
+                <div class="row">
+                    <!-- like icon and no of likes -->
+                    <div class="col-md-2">
+                        <i class="far fa-heart"></i>
+                        <p>likes</p>
+                    </div>
+        
+                </div>
+        
+                <div class="row">
+                    <hr>
+                    <div class="col">
+                        <button type="submit" class="btn btn-primary post-btn lcs">Like</button>
+                    </div>
+                    <div class="col">
+                        <button type="submit" class="btn btn-primary post-btn lcs">Comment</button>
+                    </div>
+                    <div class="col">
+                        <button type="submit" class="btn btn-primary post-btn lcs">Share</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+            
+        <br> 
+         <% } %>
+
+
     </div>
     <!-- post area ends -->
 
-    <!-- showing posts -->
+    
 
-    <% for(post of posts) {%>
-       <div class="row">
-           <div class="col-md-12">
-               <%= post.content%>
-               <%= post.user%>
-           </div>
-           </div>
-       </div> 
-        
-    <% } %>
     <div class="third-col align overflow-scroll">
         hello to yours friends list
         
@@ -90,3 +137,6 @@
     </p>
     </div>
 </div>
+
+
+
