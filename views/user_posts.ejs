@@ -34,8 +34,11 @@
                 
                     <form action="/users/posts/createpost" method="POST" id = "postfeed">
                         <div class="form-floating">
-                            <textarea class="form-control feed-post"name="feed_post"  id="feed-post"></textarea>
-                            <label for="floatingTextarea"> What's on your mind?</label>
+                            <textarea class="form-control feed-post"name="feed_post" id="feed-post" style="
+                            border: none;
+                            background-color: #c3d3ea"></textarea>
+                            <label for="floatingTextarea" style="
+                            color: #6c757d"> What's on your mind?</label>
                           </div>
                           <div class="col-12">
                             <button type="submit" class="btn btn-primary btn-lg main-post-btn">Post</button>
@@ -83,62 +86,69 @@
                 </div>
         
                 <div class="row">
-                    <div class="col-md-12 p-4 text-start">
+                    <div class="col-md-12 p-1 text-start">
                         <p class="p-4"><%= post.content%></p>
                     </div>
                 </div> 
         
-                <div class="row">
-                    <!-- like icon and no of likes -->
-                    <div class="col-md-2">
-                        <i class="far fa-heart"></i>
-                        <p>likes</p>
+                <!-- <div class="row">
+                    like icon and no of likes -->
+                    
+        
+                <!-- </div> -->
+                <hr>
+                <div class="row d-flex justify-content-center">
+                    <div class="col-md-4">
+                        
+                            <i class="far fa-heart"></i>
+                            <p>likes</p>
+                        
                     </div>
-        
-                </div>
-        
-                <div class="row">
-                    <hr>
-                    <div class="col">
+                    <div class="col-md-4">
                         <button type="submit" class="btn btn-primary post-btn lcs">Like</button>
                     </div>
-                    <div class="col">
-                        <!-- <button type="submit" class="btn btn-primary post-btn lcs">Comment</button> -->
-                        <a href="/users/posts/createcomment" class="btn btn-primary post-btn lcs" role="button" >Comment</a>
-                    </div>
-                    <div class="col">
+                    <div class="col-md-4">
                         <button type="submit" class="btn btn-primary post-btn lcs">Share</button>
                     </div>
+                    
                 </div>
-                <br>
                 <!-- form to submit the comment starts-->
                 <div class="row align-items-center">
                     <% if(locals.user) {%>
                         <div class="col-md-2 ">
-                            <img src="https://cdn.dribbble.com/users/146798/screenshots/6327584/panda-dribbble_4x.jpg?compress=1&resize=1600x1200&vertical=top" class="rounded-circle" alt="Cinque Terre" width="50" height="50">
+                            <img src="https://cdn.dribbble.com/users/146798/screenshots/6273018/boo-dribbble_4x.jpg?compress=1&resize=1600x1200&vertical=top" class="rounded-circle" alt="Cinque Terre" width="50" height="50">
                         </div>
                         <div class="col-md-10">
-                            <form action="/users/posts/createcomment" method="POST">
-                                <div class="form-group">
-                                    <textarea class="form-control feed-post" rows="1" name="content"  required placeholder="Write a comment.."></textarea>
-                                    <input type="hidden" name="postId" value="<%= post._id%>">
-                                    <button type="submit" class="btn btn-primary btn-lg main-post-btn">Comment</button>
+                            <div class="row align-items-center">
+                                <div class="col-md-8">
+                                    <form action="/users/posts/createcomment" method="POST" style="
+                                    width: 110%">
+                                        <textarea class="form-control feed-post" rows="1" name="content"  required placeholder="Write a comment.." style="
+                                        border: none;
+                                        background-color: #c3d3ea"></textarea>
+                                        <input type="hidden" name="postId" value="<%= post._id%>">
                                 </div>
-                            </form>
+                                <div class="col-md-4">
+                                    <button type="submit" class="btn btn-primary post-btn lcs" style="width:auto">Comment</button>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
+                       
                     <%}%>
                 </div>
                 <!-- form to submit the comment ends -->
-                <br>
+                <hr>
                 <!-- showing all the comments from the database -->
                 <div class="row align-items-center">
                     <% for(comment of post.comments) {%>
-                        <div class="col-md-2 ">
-                            <img src="https://cdn.dribbble.com/users/146798/screenshots/6327584/panda-dribbble_4x.jpg?compress=1&resize=1600x1200&vertical=top" class="rounded-circle" alt="Cinque Terre" width="50" height="50">
+                        <div class="col-md-2 align-items-center">
+                            <img src="https://cdn.dribbble.com/users/146798/screenshots/6284653/peach-dribbble_4x.jpg?compress=1&resize=1600x1200&vertical=top" class="rounded-circle" alt="Cinque Terre" width="50" height="50">
                         </div>
-                        <div class="col-md-10">
+                        <div class="col-md-10 text-start">
+                            <h6><%= comment.user.name%></h6>
                             <p><%= comment.content%></p>
-                            <p><%= comment.user.name%></p>
+                            
                         </div>
                     <%}%>
                 </div>
