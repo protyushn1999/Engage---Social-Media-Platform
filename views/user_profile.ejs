@@ -1,34 +1,74 @@
+<link rel="stylesheet" href="/css/user_posts.css">
 <link rel="stylesheet" href="/css/user_profile.css">
-<div class="row profile-body">
-    <h1>
-        Socialley-X <%= title %> 
-    </h1>
-    <p>
-        <h2>
-            profile page of the user.
-        </h2>
-    </p>
-    <div class="row">
-        <div class="col-md-2">
-    
+
+<div class="row justify-content-center">
+    <div class="col-md-5 second-col">
+        <!-- form to post begins here -->
+        <div class="row overflow-hidden cover-photo">
+            <!-- button for changing the cover photo -->
+            <% if(profile_user.id == locals.user._id) {%> 
+                <a href="/users/profile/<%= locals.user._id%>">
+                    <div class="btn btn-primary text-center post-btn">
+                        <h6>Edit Cover Photo</h6>
+                    </div>
+                </a>
+            <% } %>
         </div>
-        <div class="col-md-4">
-            <ul>
-                <li>
-                    name : <%= locals.user.name%>
-                </li>
-                <li>
-                    email : <%= locals.user.email%>
-                </li>
-            </ul>
+
+        <div class="row">
+            <div class="col-md-12 ">
+                <div class="row align-items-end justify-content-start edit-profile-sec">
+                    <div class="col-md-4 profile-img">
+                        <img src="https://cdn.dribbble.com/users/146798/screenshots/6327584/panda-dribbble_4x.jpg?compress=1&resize=1600x1200&vertical=top" class="rounded-circle" alt="Cinque Terre" width="150" height="150">
+                    </div>
+                    <div class="col-md-4 text-start profile-img">
+                        <h3><%= locals.profile_user.name%></h3>
+                        <small>
+                           <%= locals.profile_user.email%>
+                        </small>
+                    </div>
+                    <div class="col-md-4">
+                        <% if(profile_user.id == locals.user._id) {%> 
+                            <a href="/users/profile/<%= locals.user._id%>">
+                                <div class="btn btn-primary text-center post-btn">
+                                    <h6>Edit Profile</h6>
+                                </div>
+                            </a>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col-md-6">
-    
+        <hr>
+        <div class="row ">
+           <div class="col-md-5 text-start">
+            <h4>Intro</h4>
+            <h6> 
+                Add Bio
+            </h6>   
+            <ul style="display: inline-block">
+                   <li>
+                       Lives in Goa, India
+                   </li>
+                   <li>
+                       From Balasore
+                   </li>
+                   <li>
+                       Its Complicated
+                   </li>
+                   <li>
+                       Joined on May 2013
+                   </li>
+                   <li>
+                       Hobbies
+                   </li>
+               </ul>
+
+           </div>
+           <div class="col-md-7">
+world
+           </div>
         </div>
+        <hr>
     </div>
-        
 </div>
-
-
-
- 

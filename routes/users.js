@@ -10,7 +10,8 @@ router.get('/signup' , usersController.signUp);
 router.get('/signin' , usersController.signIn);
 
 // User cant see the profile without being logged in , hence we use checkAuthentication middleware
-router.get('/profile' ,passport.checkAuthentication, usersController.profile);
+router.get('/profile/:id' ,passport.checkAuthentication, usersController.profile);
+
 //router.get('/posts' , usersController.posts);
 router.post('/create' , usersController.create);
 

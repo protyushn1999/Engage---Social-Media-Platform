@@ -62,9 +62,17 @@ module.exports.createSession = function(req,res) {
 // render the profile page
 module.exports.profile = function(req,res) { 
     //return res.end("<h1>User Profile</h1>");
-    return res.render('user_profile',{
-        title: 'User Profile'
+    userDataBase.findById(req.params.id, function(err,user) {
+        if(err) {
+            console.log('error in finding the user');
+            return;
+        }
+        return res.render('user_profile',{
+            title: 'User Profile',
+            profile_user: user
+        })
     })
+    
 }
 
 // render the posts page
@@ -100,10 +108,19 @@ module.exports.posts = function(req,res) {
             console.log('error in fetching the posts');
             return;
         }
-        return res.render('user_posts',{
-            title: 'User Posts',
-            posts: posts,
-        })
+        //find all the users from the user database to show on the friends list
+         userDataBase.find({}, function(err, all_users) {
+             if(err) {
+                 console.log("Error in finding the users");
+                 return;
+             }
+             //console.log(all_users);
+             return res.render('user_posts',{
+                title: 'User Posts',
+                posts: posts,
+                all_users: all_users
+            })
+         })    
     })
 }
 

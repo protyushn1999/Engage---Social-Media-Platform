@@ -1,221 +1,46 @@
-<link rel="stylesheet" href="/css/user_posts.css">
+<link rel="stylesheet" href="/css/user_posts.css" />
 <div class="row posts-body align-items-start justify-content-center">
-    
-    <div class="first-col align overflow-scroll">
-        <div class="row">
-            hello
-        </div>
-        <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque, quibusdam repellendus cupiditate accusantium sapiente aut non. Quos illo sunt harum nisi, quod consequuntur, placeat rerum assumenda, neque atque quibusdam quis.
-            Nesciunt quaerat quas incidunt praesentium dolores dignissimos ad tenetur culpa, rem tempora quidem vitae asperiores voluptates amet laborum. Perspiciatis tempore eaque et corporis labore autem mollitia dignissimos quis distinctio. Adipisci?
-            Sed dolores animi doloribus! In nobis aut modi quo eum voluptatem natus est nam et, voluptatibus quidem. Reprehenderit commodi sed at aspernatur a et iste? Recusandae nulla doloribus labore provident?
-            Mollitia ratione exercitationem illum a, placeat numquam inventore consequuntur cupiditate hic sint animi eaque ea ipsum iure in nisi veniam? Nam tenetur, amet ea eum blanditiis excepturi velit dignissimos voluptatibus!
-            Exercitationem repudiandae quasi corrupti aspernatur deserunt accusamus ex aliquam quaerat nesciunt, neque veniam odit quisquam, omnis at perferendis magnam. Omnis et ipsam sunt neque molestias commodi saepe eius. Corrupti, laborum!
-            Cumque consequuntur ratione perferendis recusandae. Voluptatem, accusamus facere obcaecati doloribus repudiandae minima unde inventore adipisci ut praesentium dolorem! Temporibus libero iste nostrum culpa possimus. Sint totam deleniti et voluptatibus recusandae?
-            Molestias debitis aperiam distinctio voluptatem fugit provident laboriosam dicta assumenda autem ut nemo nam modi quod sequi consectetur natus, architecto culpa eligendi quisquam dolore iste? Aliquid praesentium nihil labore repudiandae.
-            Nihil nulla, sunt cum facere tempora repellat fugit rem, amet necessitatibus minima laudantium at ipsum cupiditate iste quos incidunt mollitia architecto velit quisquam quasi corrupti sint. Iste libero dolorem consequatur.
-            Debitis tempore laudantium tenetur molestias laborum blanditiis labore molestiae exercitationem reprehenderit aut asperiores consectetur rerum dolores libero, voluptas enim adipisci. Magni, aspernatur amet? Corrupti dolores molestiae temporibus expedita voluptates quasi!
-            Eos quasi reprehenderit omnis, laborum reiciendis eaque iste amet ad? Officiis delectus sapiente excepturi hic. Perferendis ratione eum doloremque possimus provident, harum nostrum, facere, nihil dolorem aspernatur ipsa? Culpa, rem?
-            Saepe alias sunt perspiciatis nulla at odit? Adipisci animi exercitationem ab earum ipsam, recusandae non accusantium accusamus omnis quidem dolor soluta nulla minima dolorum quisquam neque. Sapiente iste neque non!
-            Itaque enim quas iusto facere aspernatur minus consectetur? Reiciendis, enim rerum! Cupiditate, a, incidunt corporis, alias dolorum maxime illum itaque unde eum et sunt pariatur error sit eaque quaerat assumenda.
-            Aut, fugiat! Quos amet recusandae incidunt, doloribus suscipit modi possimus ullam qui aut, rem nisi minima corrupti facilis eum? Aperiam harum iusto quisquam maiores voluptatibus error quidem atque fugit perferendis.
-            Ad alias aut quidem rerum enim sit quae nemo iusto in sequi quos eveniet quod velit suscipit, est debitis quaerat totam voluptas iste exercitationem? Fuga blanditiis laudantium sint at labore!
-            Suscipit porro iure consequuntur cum nisi, earum vitae odio rerum id quae officia deserunt itaque accusamus iusto esse. Animi quae omnis impedit vitae aperiam suscipit, aspernatur molestias sequi beatae accusantium?
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit deserunt aliquam quisquam laudantium minus repellendus pariatur officiis. Pariatur, eum quam laboriosam, cupiditate deleniti, et qui incidunt ipsam quis nobis accusantium?
-            Atque quia nesciunt laudantium, corrupti suscipit vero nulla, sequi perspiciatis molestias libero deserunt neque voluptate, tenetur soluta. Inventore dolor excepturi facilis facere ratione deserunt obcaecati nostrum adipisci? Enim, fuga modi?
-        </p>
+  <div class="first-col align overflow-scroll">
+    <div class="row">
+        imp links
     </div>
+  </div>
 
+  <!-- post area begins here -->
+  <div class="col-md-5 second-col overflow-auto">
+        <!-- form to post begins here -->
+        <%- include("_postform") -%>
+        <!-- form to post ends here -->
+        <br/>
 
-    <div class="col-md-5 second-col overflow-auto">
-        <% if(locals.user) { %>
-        <div class="row main-post noextramargin">
-            <div class="row noextramargin">
-                
-                    <form action="/users/posts/createpost" method="POST" id = "postfeed">
-                        <div class="form-floating">
-                            <textarea class="form-control feed-post"name="feed_post" id="feed-post" style="
-                            border: none;
-                            background-color: #c3d3ea"></textarea>
-                            <label for="floatingTextarea" style="
-                            color: #6c757d"> What's on your mind?</label>
-                          </div>
-                          <div class="col-12">
-                            <button type="submit" class="btn btn-primary btn-lg main-post-btn">Post</button>
-                          </div>
-                    </form> 
-            </div>
-            <div class="row noextramargin">
-                <div class="col">
-                    <button type="submit" class="btn btn-primary post-btn lcs">Live Video</button>
-                </div>
-                <div class="col">
-                    <button type="submit" class="btn btn-primary post-btn lcs">Photo/Video</button>
-                </div>
-                <div class="col">
-                    <button type="submit" class="btn btn-primary post-btn lcs">Feeling/Activity</button>
-                </div>
-                
-               
-            </div>
-            Hello from posts
-           
-        </div>
+        <!-- showing all the posts from the database starts here -->
+
+        <% for(post of posts) {%> 
+            <%- include("_showpost") -%>
+        <br/>
         <% } %>
-        <br>
-        <!-- showing all the posts from the database -->
-        
-        <% for(post of posts) {%>
-        <div class="row each-post">
-            <div class="col-md-12 ">
-                <div class="row">
-                    <div class="col-md-2">
-                        <img src="https://cdn.dribbble.com/users/146798/screenshots/6327584/panda-dribbble_4x.jpg?compress=1&resize=1600x1200&vertical=top" class="rounded-circle" alt="Cinque Terre" width="50" height="50">
-                    </div>
-                    <div class="col-md-8 text-start">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h6><%= post.user.name%></h6>
-                            </div>
-                            <div class="col-md-12">
-                                <p><%= post.createdAt%></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                       
-                           
-                        <% if(locals.user && locals.user.id == post.user.id) { %>
-                           
-                              <div class= "dropdown" >
-                                <button class="btn btn-secondary dropdown-toggle post-btn" type="button" data-bs-toggle="dropdown" >
-                                    <i class="fas fa-ellipsis-h"></i>
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                  <li><a class="dropdown-item" href="/users/posts/deletepost/<%= post.id%>">Delete</a></li>
-                                </ul>
-                              </div>
-                            
-                        <% } %>
-                            
-                    </div>
-                    <hr>
+        <!-- showing all the posts from the database ends here -->
+  </div>
+  <!-- post area ends -->
+
+  <div class="third-col align overflow-scroll">
+        <!-- showing all the friends from the database starts here -->
+        <% for(user of all_users) { %>
+            <div class="row align-items-center mt-2 mb-2">
+                <div class="col-md-2 align-self-center">
+                    <img src="https://cdn.dribbble.com/users/146798/screenshots/6327584/panda-dribbble_4x.jpg?compress=1&resize=1600x1200&vertical=top" class="rounded-circle" alt="Cinque Terre" width="50" height="50">
                 </div>
-        
-                <div class="row">
-                    <div class="col-md-12 p-1 text-start">
-                        <p class="p-4"><%= post.content%></p>
-                    </div>
-                </div> 
-        
-                <!-- <div class="row">
-                    like icon and no of likes -->
-                    
-        
-                <!-- </div> -->
-                <hr>
-                <div class="row d-flex justify-content-center">
-                    <div class="col-md-4 align-self-center">
-                        
-                            <i class="fas fa-heart"></i>
-                        
-                    </div>
-                    <div class="col-md-4">
-                        <button type="submit" class="btn btn-primary post-btn lcs">Like</button>
-                    </div>
-                    <div class="col-md-4">
-                        <button type="submit" class="btn btn-primary post-btn lcs">Share</button>
-                    </div>
-                    
-                </div>
-                <!-- form to submit the comment starts-->
-                <div class="row align-items-center">
-                    <% if(locals.user) {%>
-                        <div class="col-md-2 ">
-                            <img src="https://cdn.dribbble.com/users/146798/screenshots/6273018/boo-dribbble_4x.jpg?compress=1&resize=1600x1200&vertical=top" class="rounded-circle" alt="Cinque Terre" width="50" height="50">
-                        </div>
-                        <div class="col-md-10">
-                            <div class="row align-items-center">
-                                <div class="col-md-8">
-                                    <form action="/users/posts/createcomment" method="POST" style="
-                                    width: 110%">
-                                        <textarea class="form-control feed-post" rows="1" name="content"  required placeholder="Write a comment.." style="
-                                        border: none;
-                                        background-color: #c3d3ea"></textarea>
-                                        <input type="hidden" name="postId" value="<%= post._id%>">
-                                </div>
-                                <div class="col-md-4">
-                                    <button type="submit" class="btn btn-primary post-btn lcs" style="width:auto">Comment</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                       
-                    <%}%>
-                </div>
-                <!-- form to submit the comment ends -->
-                <hr>
-                <!-- showing all the comments from the database -->
-                <div class="row align-items-center">
-                    <% for(comment of post.comments) {%>
-                        <div class="col-md-2 align-items-center">
-                            <img src="https://cdn.dribbble.com/users/146798/screenshots/6284653/peach-dribbble_4x.jpg?compress=1&resize=1600x1200&vertical=top" class="rounded-circle" alt="Cinque Terre" width="50" height="50">
-                        </div>
-                        <div class="col-md-8 text-start">
-                            <h6><%= comment.user.name%></h6>
-                            <p><%= comment.content%></p>
-                            
-                        </div>
-                        <div class="col-md-2">
-                       
-                           
-                            <% if(locals.user && locals.user.id == comment.user.id) { %>
-                               
-                                  <div class= "dropdown" >
-                                    <button class="btn btn-secondary dropdown-toggle post-btn" type="button" data-bs-toggle="dropdown" >
-                                        <i class="fas fa-ellipsis-h"></i>
-                                    </button>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                      <li><a class="dropdown-item" href="/users/posts/deletecomment/<%= comment.id%>">Delete</a></li>
-                                    </ul>
-                                  </div>
-                                
-                            <% } %>
-                                
-                        </div>
-                    <%}%>
+                <div class="col-md-10">
+                    <ul class = "justify-content-start">
+                        <li>
+                        <a href="/users/profile/<%= user._id%>">
+                                <h6><%= user.name %></h6>
+                        </a>
+                        </li>
+                    </ul>
                 </div>
             </div>
-        </div>
-            
-        <br> 
-         <% } %>
-
-
-    </div>
-    <!-- post area ends -->
-
-    
-
-    <div class="third-col align overflow-scroll">
-        hello to yours friends list
-        
-    <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos natus amet nam distinctio explicabo atque recusandae sit, sunt ratione nisi quo maiores tempora iste fugit eum possimus neque odit iure.
-        Corrupti possimus consequatur magnam numquam velit harum ipsam, tenetur, earum, suscipit distinctio quia maiores! Excepturi placeat, perspiciatis a nostrum voluptatum non natus illo sapiente esse eum perferendis maiores minus expedita.
-        Quo tempora sunt, unde vel autem, repellat dignissimos iure accusantium at magni suscipit perspiciatis quidem perferendis, tenetur quas est! Ut quam veritatis minus error nesciunt reiciendis eos molestias nihil fuga.
-        Quam praesentium quisquam tempore mollitia sapiente exercitationem rem nam cupiditate neque, nesciunt similique omnis. Accusantium expedita in ab, molestiae quis corrupti tenetur saepe sapiente, placeat itaque porro soluta unde perspiciatis.
-        Quo tenetur provident eaque ea et quisquam autem? Ipsa alias consequuntur, voluptatum cupiditate quos magnam voluptate, porro fugiat harum sapiente non dolorum dolore quas! Laudantium repellendus adipisci rem velit mollitia!
-        Soluta minima cum aspernatur alias natus ex itaque reiciendis necessitatibus numquam quas illum consequuntur quibusdam vel maiores tenetur beatae sit repellat doloribus deserunt fuga, ad commodi. Maxime voluptatibus quidem quod.
-        Delectus reprehenderit blanditiis omnis rem ab mollitia aliquid quas adipisci! Itaque doloribus delectus excepturi omnis rerum fuga quisquam vero ab neque fugit, est dolor quos tenetur ex, animi inventore officia.
-        Corrupti, in? Facere quae numquam sed accusamus expedita mollitia saepe libero corporis totam doloribus? Accusamus ipsam laboriosam architecto. Earum commodi, maxime nemo fugit obcaecati assumenda ab consectetur debitis officia eaque?
-        Distinctio id ut eum dolor praesentium soluta, tenetur modi quisquam, aspernatur deserunt cumque culpa, esse numquam nesciunt. Officiis similique doloribus dicta molestias eligendi natus reprehenderit exercitationem praesentium, incidunt consectetur inventore.
-        Consequatur soluta debitis provident nulla exercitationem veritatis esse sint et laboriosam fugiat, obcaecati illo distinctio nobis rem voluptatum? Qui, culpa illo? Omnis non possimus officiis ullam, magni totam deleniti sed.
-        Eaque modi consequuntur minima? Inventore iste vel libero excepturi in iure! Accusamus corrupti ipsum voluptatibus quam aspernatur iusto nostrum adipisci, minus facere explicabo optio dolore necessitatibus. Corrupti est nostrum consequatur.
-        Rem numquam facilis quis quod voluptas praesentium, exercitationem corporis rerum illum cum placeat magnam repellendus reiciendis architecto harum voluptate autem nostrum quibusdam earum eius inventore dicta sed! Hic, ab inventore!
-    </p>
-    </div>
+        <% } %>
+         <!-- showing all the friends from the database ends here -->
+  </div>
 </div>
-
-
-

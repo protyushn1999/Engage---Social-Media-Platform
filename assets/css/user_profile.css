@@ -1,6 +1,18 @@
-.profile-body{
-    padding: 0em 1em;
-    margin: 0em 1em;
-    height: 80vh;
-    align-items: center;
+.cover-photo{
+    background-image: url('https://cdn.dribbble.com/users/175710/screenshots/14646642/media/6089295d9f6df94b9ecfaeda7cef621d.png?compress=1&resize=1600x1200&vertical=top');
+    background-size: cover;
+    background-position: center;
+    height: 35vh;
+}
+.post-btn h6 {
+    margin: 0;
+    padding: 0.5em 1em;
+}
+.edit-profile-sec{
+    margin-top: -3em;
+    margin-bottom: 1em;
+}
+.profile-img{
+    margin: 0;
+    padding: 0;
 }
