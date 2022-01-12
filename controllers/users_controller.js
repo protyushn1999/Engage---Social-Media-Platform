@@ -56,24 +56,41 @@ module.exports.create = function(req,res) {
 }
 //get the log in data and create a new session for the user
 module.exports.createSession = function(req,res) {
-    return res.redirect('/users/profile');
+    return res.redirect('/users/posts');
 }
 
 // render the profile page
 module.exports.profile = function(req,res) { 
-    //return res.end("<h1>User Profile</h1>");
     userDataBase.findById(req.params.id, function(err,user) {
         if(err) {
             console.log('error in finding the user');
             return;
         }
-        return res.render('user_profile',{
-            title: 'User Profile',
-            profile_user: user
-        })
+        postDataBase.find({user: req.params.id})
+            .populate({
+                path : 'comments',
+                populate : {
+                    path: 'user'
+                }
+            })
+            .exec(function(err, posts_by_user) {
+                if(err) {
+                    console.log('error in fetching the posts');
+                    return;
+                }
+                //console.log(posts_by_user);
+                return res.render('user_profile',{
+                title: 'User Profile',
+                profile_user: user,
+                posts: posts_by_user
+                })
+
+            })
+                
     })
-    
+        
 }
+
 
 // render the posts page
 
@@ -122,6 +139,19 @@ module.exports.posts = function(req,res) {
             })
          })    
     })
+}
+
+// update the user profile and redirects the user to the profile page
+module.exports.updateprofile = function(req,res) {
+    if(req.params.id == req.user.id) {
+        userDataBase.findByIdAndUpdate(req.params.id,{name: req.body.name, email: req.body.email}, function(err,user) {
+            if(err) {
+                console.log('Error in updating the user profile');
+                return;
+            }
+            return res.redirect('back');
+        })
+    }
 }
 
 
