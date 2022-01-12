@@ -1,0 +1,135 @@
+
+<div class="col-md-8">
+    <% for(post of posts) {%>
+
+        <div class="row">
+            <div class="col-md-2">
+                <img src="https://cdn.dribbble.com/users/146798/screenshots/6327584/panda-dribbble_4x.jpg?compress=1&resize=1600x1200&vertical=top"
+                    class="rounded-circle" alt="Cinque Terre" width="50" height="50">
+            </div>
+            <div class="col-md-8 text-start">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h6>
+                            <%= profile_user.name%>
+                        </h6>
+                    </div>
+                    <div class="col-md-12">
+                        <small>
+
+                            <%= post.createdAt%>
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+
+
+                <% if(profile_user.id==locals.user._id) { %>
+
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle post-btn" type="button"
+                            data-bs-toggle="dropdown">
+                            <i class="fas fa-ellipsis-h"></i>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item"
+                                    href="/users/posts/deletepost/<%= post.id%>">Delete</a></li>
+                        </ul>
+                    </div>
+
+                    <% } %>
+
+            </div>
+            <hr>
+        </div>
+        <div class="row">
+            <div class="col-md-12 p-1 text-start">
+                <p class="p-4">
+                    <%= post.content%>
+                </p>
+            </div>
+        </div>
+        <hr>
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-4 align-self-center">
+
+                <i class="fas fa-heart"></i>
+
+            </div>
+            <div class="col-md-4">
+                <button type="submit" class="btn btn-primary post-btn lcs">Like</button>
+            </div>
+            <div class="col-md-4">
+                <button type="submit" class="btn btn-primary post-btn lcs">Share</button>
+            </div>
+
+        </div>
+        <br>
+        <div class="row align-items-center">
+            <% if(locals.user) {%>
+                <div class="col-md-2 ">
+                    <img src="https://cdn.dribbble.com/users/146798/screenshots/6273018/boo-dribbble_4x.jpg?compress=1&resize=1600x1200&vertical=top"
+                        class="rounded-circle" alt="Cinque Terre" width="50" height="50">
+                </div>
+                <div class="col-md-10">
+                    <div class="row align-items-center">
+                        <div class="col-md-8">
+                            <form action="/users/posts/createcomment" method="POST" style="
+                                        width: 110%">
+                                <textarea class="form-control feed-post" rows="1" name="content" required
+                                    placeholder="Write a comment.." style="
+                                            border: none;
+                                            background-color: #c3d3ea"></textarea>
+                                <input type="hidden" name="postId" value="<%= post._id%>">
+                        </div>
+                        <div class="col-md-4">
+                            <button type="submit" class="btn btn-primary post-btn lcs"
+                                style="width:auto">Comment</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <%}%>
+        </div>
+        <div class="row align-items-center">
+            <% for(comment of post.comments) {%>
+                <div class="col-md-2 align-items-center">
+                    <img src="https://cdn.dribbble.com/users/146798/screenshots/6284653/peach-dribbble_4x.jpg?compress=1&resize=1600x1200&vertical=top"
+                        class="rounded-circle" alt="Cinque Terre" width="50" height="50">
+                </div>
+                <div class="col-md-8 text-start">
+                    <h6>
+                        <%= comment.user.name%>
+                    </h6>
+                    <p>
+                        <%= comment.content%>
+                    </p>
+
+                </div>
+                <div class="col-md-2">
+
+
+                    <% if(locals.user && locals.user.id==comment.user.id) { %>
+
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle post-btn" type="button"
+                                data-bs-toggle="dropdown">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li><a class="dropdown-item"
+                                        href="/users/posts/deletecomment/<%= comment.id%>">Delete</a></li>
+                            </ul>
+                        </div>
+
+                        <% } %>
+
+                </div>
+                <%}%>
+        </div>
+        <hr class="py-1">
+        <br>
+        <%}%>
+</div>

@@ -16,3 +16,41 @@
     margin: 0;
     padding: 0;
 }
+.modal-content{
+    background-color: var(--primary);
+    background-color: var(--primary);
+    height: 25vh;
+}
+.modal-body{
+    display: flex;
+    
+}
+.edit-profile-form{
+    display: flex;
+
+}
+.main-post-btn{
+    width: fit-content;
+}
+.post-btn:active{
+    background-color: var(--hover);
+    border: none;
+}
+.post-btn:focus{
+    background-color: var(--secondary);
+    border: none;
+}
+
+.no-pad h5{
+    padding-left: 0;
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+.no-pad h6{
+    padding-left: 0;
+    padding-top: 1em;
+}
+.edit-btn{
+    font-weight: 600;
+    padding: 0.8em 1.5em;
+}

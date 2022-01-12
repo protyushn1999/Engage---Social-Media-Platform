@@ -13,7 +13,23 @@ const userSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true
+    },
+    currentResidence: {
+        type: String
+    },
+    permanentResidence: {
+        type: String
+    },
+    relationships: {
+        type: String
+    },
+    hobbies: {
+        type: String
+    },
+    bio: {
+        type: String
     }
+
 }, {
     timestamps: true
 });

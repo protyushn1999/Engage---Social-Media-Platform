@@ -1,0 +1,57 @@
+<div class="row">
+    <div class="col-md-12 ">
+        <div class="row align-items-end justify-content-start edit-profile-sec">
+            <div class="col-md-4 profile-img">
+                <img src="https://cdn.dribbble.com/users/146798/screenshots/6327584/panda-dribbble_4x.jpg?compress=1&resize=1600x1200&vertical=top"
+                    class="rounded-circle" alt="Cinque Terre" width="150" height="150">
+            </div>
+            <div class="col-md-4 text-start profile-img">
+                <h3>
+                    <%= locals.profile_user.name%>
+                </h3>
+                <small>
+                    <%= locals.profile_user.email%>
+                </small>
+            </div>
+            <div class="col-md-4">
+                <% if(profile_user.id==locals.user._id) {%>
+
+                    <button type="button" class="btn btn-primary main-post-btn post-btn edit-btn" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal1">
+                        Edit Profile
+                    </button>
+
+
+                    <div class="modal fade " id="exampleModal1" tabindex="-1">
+                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                            <div class="modal-content ">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Edit Profile</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close">
+                                    </button>
+                                </div>
+                                <div class="modal-body justify-content-center">
+                                    <form action="/users/profile/updateprofile/<%= profile_user.id%>" method="POST">
+                                        <div class="mb-3">
+                                            <input type="name" class="form-control" name="name"
+                                                placeholder="New Name" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <input type="email" class="form-control" name="email" placeholder="New Email Address" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <button type="submit"class="btn btn-primary main-post-btn">Update</button>
+                                        </div>
+                                    </form>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <% } %>
+            </div>
+        </div>
+    </div>
+</div>

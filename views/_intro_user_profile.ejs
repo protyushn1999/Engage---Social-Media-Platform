@@ -1,0 +1,93 @@
+<div class="col-md-4 text-start">
+                
+    <div class="row">
+        <h4>Intro</h4>
+    </div>
+    <div class="row">
+        <% if(profile_user.id==locals.user._id) {%>
+
+            <button type="button" class= "btn btn-primary main-post-btn post-btn" data-bs-toggle="modal" 
+            data-bs-target="#exampleModal">
+                <h6>
+                    Update Bio
+                </h6>
+            </button>
+            
+            <div class="modal fade " id="exampleModal" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                    <div class="modal-content" style="height: fit-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Intro</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close">
+                            </button>
+                        </div>
+                        <div class="modal-body justify-content-center">
+                            <form action="/users/profile/updatebio/<%= profile_user.id%>" method="POST">
+                                <div class="mb-3">
+                                    <div class="form-floating">
+                                        <textarea class="form-control" placeholder="Describe Yourself!" id="floatingTextarea" name = "bio" ></textarea>
+                                        <label for="floatingTextarea">Describe yourself!</label>
+                                      </div>
+                                </div>
+                                <div class="mb-3">
+                                    <input type="name" class="form-control" name="cur_res"
+                                        placeholder="Current Residence" >
+                                </div>
+                                <div class="mb-3">
+                                    <input type="name" class="form-control" name="per_res"
+                                        placeholder="Permanent Residence" >
+                                </div>
+                                <div class="mb-3">
+                                    <input type="name" class="form-control" name="rel_stat"
+                                        placeholder="Relationship Status" >
+                                </div>
+                                <div class="mb-3">
+                                    <input type="name" class="form-control" name="hobbies"
+                                        placeholder="Love doing.." >
+                                </div>
+                                <div class="mb-3">
+                                    <button type="submit"class="btn btn-primary main-post-btn">Update</button>
+                                </div>
+                            </form>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <% } %>
+
+    </div>
+    <div class="row no-pad">
+        <h5>
+            <%= profile_user.bio%>
+        </h5>
+
+    </div>
+    <div class="row no-pad">
+        <h6>
+            <i class="fas fa-home"></i> Lives in <%= profile_user.currentResidence %>
+        </h6>
+
+    </div>
+    <div class="row no-pad">
+        <h6>
+            <i class="fas fa-map-marker"></i> From <%= profile_user.permanentResidence%>
+        </h6>
+
+    </div>
+    <div class="row no-pad">
+        <h6>
+            <i class="fas fa-heart"></i> Its <%= profile_user.relationships%>
+        </h6>
+
+    </div>
+    <div class="row no-pad">
+        <h6>
+            <i class="fas fa-couch"></i> I love <%= profile_user.hobbies%>
+        </h6>
+
+    </div>
+
+</div>

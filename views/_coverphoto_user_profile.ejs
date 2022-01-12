@@ -1,0 +1,10 @@
+<div class="row overflow-hidden cover-photo">
+    <!-- button for changing the cover photo -->
+    <% if(profile_user.id==locals.user._id) {%>
+        <a href="/users/profile/<%= locals.user._id%>">
+            <div class="btn btn-primary text-center post-btn">
+                <h6>Edit Cover Photo</h6>
+            </div>
+        </a>
+        <% } %>
+</div>
