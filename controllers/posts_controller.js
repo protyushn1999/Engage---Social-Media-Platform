@@ -2,19 +2,22 @@ const postDataBase = require('../models/posts');
 const commentDataBase = require('../models/comments');
 
 // creating a post
-module.exports.createPost = function(req,res) {
-    postDataBase.create({
-        content: req.body.feed_post,
-        user: req.user._id
-    },function(err,postData) {
-        if(err) { 
-            console.log('Error in creating a new post'); 
-            return res.redirect('/users/posts');
-        }
+try{
+    module.exports.createPost = async function(req,res) {
+        let postData = await postDataBase.create({
+            content: req.body.feed_post,
+            user: req.user._id
+        });
+    
         console.log('*********' , postData);
+        req.flash('success', 'Post created successfully');
         return res.redirect('/users/posts');
-    })
+    }
+}catch(err){
+    req.flash('error', 'Post cant be created');
+    console.log('Error',err);
 }
+
 // creating a comment on the post
 module.exports.createcomment = function(req,res) { 
     postDataBase.findById(req.body.postId, function(err,post) {
@@ -36,7 +39,7 @@ module.exports.createcomment = function(req,res) {
 
                 post.comments.push(comment);
                 post.save();
-
+                req.flash('success', 'Comment Posted');
                 return res.redirect('/users/posts');
             })
         }
@@ -44,28 +47,28 @@ module.exports.createcomment = function(req,res) {
 }
 
 // module to delete a post from the database
-module.exports.deletepost = function(req,res) {
-    postDataBase.findById(req.params.id, function(err,post) {
-        if(err) {
-            console.log('Error in finding the post');
-            return res.redirect('/users/posts');
-        }
+try {
+  module.exports.deletepost = async function (req, res) {
+    let post = await postDataBase.findById(req.params.id);
 
-        if(post && post.user == req.user.id) {
-            post.remove();
+    if (post && post.user == req.user.id) {
+      post.remove();
 
-            // delete all the comments associated with the post in the comment data base
-            commentDataBase.deleteMany({post: req.params.id}, function(err) {
-                if(err) {
-                    console.log('Error in deleting the comments');
-                    return res.redirect('/users/posts');
-                }
-
-                return res.redirect('/users/posts');
-            })
-        }
-    })
+      // delete all the comments associated with the post in the comment data base
+      await commentDataBase.deleteMany({ post: req.params.id });
+      req.flash('success', 'Post and associated comments deleted');
+      return res.redirect("/users/posts");
+    } else {
+        req.flash('error', 'Post cant be deleted');
+        return res.redirect("/users/posts");
+    }
+  };
+} catch (err) {
+  console.log("Error", err);
+  req.flash('error', err);
 }
+
+
 
 // module to delete a comment from the post == > delete it from comment schema as well as from the post schema
 module.exports.deletecomment = function(req,res) {

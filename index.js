@@ -1,7 +1,7 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const app = express();
-const port = 7000;
+const port = 8000;
 const expressLayouts = require('express-ejs-layouts');
 const db = require('./config/mongoose');
 //used for session cookies
@@ -9,6 +9,8 @@ const session = require('express-session');
 const passport = require('passport');
 const passportLocal = require('./config/passport-local');
 const MongoStore = require('connect-mongo');
+const flash = require('connect-flash');
+const customMware = require('./config/middleware');
 //const sass = require('node-sass');
 
 
@@ -67,6 +69,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 //passport.setAuthenticatedUser() is used to set the user in the session and store it in the locals
 app.use(passport.setAuthenticatedUser);
+
+app.use(flash());
+app.use(customMware.setFlash);
+
 
 //setting the routes ==>  it means that all the '/' webpage will be redirect to ./routes folder
 app.use('/', require('./routes'));

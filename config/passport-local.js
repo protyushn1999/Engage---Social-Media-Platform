@@ -9,15 +9,19 @@ passport.use(
   new LocalStrategy(
     {
       usernameField: "email",
+      passReqToCallback: true
     },
-    function (email, password, done) {
+    function (req, email, password, done) {
       //find a user int he database matching the credentials given by the user passed
       userDataBase.findOne({ email: email }, function (err, user) {
         if (err) {
           console.log("error in finding the user in signing in");
+          req.flash('error', err);
           return;
         }
         if (!user || user.password !== password) {
+          req.flash('error', 'Invalid Username/Password');
+          console.log("Invalid Username/Password");
           return done(null, false);
         }
 

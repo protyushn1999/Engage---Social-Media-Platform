@@ -57,6 +57,8 @@ module.exports.create = function(req,res) {
 }
 //get the log in data and create a new session for the user
 module.exports.createSession = function(req,res) {
+    // req is a object and we are setting the flash property in it.. which include types such as success failure etc..
+    req.flash('success', 'Logged in Successfully');
     return res.redirect('/users/posts');
 }
 
@@ -208,6 +210,7 @@ module.exports.updatebio = function(req,res) {
 // logout the user and redirect to the sign in page
 module.exports.destroySession = function(req,res) {
     req.logout();
+    req.flash('success', 'You have logged out!');
     return res.redirect('/');
 }
 
