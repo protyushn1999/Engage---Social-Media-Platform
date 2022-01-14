@@ -1,5 +1,6 @@
 const postDataBase = require('../models/posts');
 const commentDataBase = require('../models/comments');
+const userDataBase = require('../models/user');
 
 // creating a post
 try{
@@ -8,10 +9,25 @@ try{
             content: req.body.feed_post,
             user: req.user._id
         });
-    
+        let postByUserDetails = await userDataBase.findById(req.user._id);
+
         console.log('*********' , postData);
+        console.log('*********' , postByUserDetails);
+
         req.flash('success', 'Post created successfully');
-        return res.redirect('/users/posts');
+        //return res.redirect('/users/posts');
+
+        if(req.xhr) {
+            
+            return res.status(200).json({
+                data: {
+                    post: postData,
+                    userId: postByUserDetails
+                },
+                message: 'Post Created successfully - pc'
+            });
+        }
+        
     }
 }catch(err){
     req.flash('error', 'Post cant be created');
@@ -54,6 +70,16 @@ try {
     if (post && post.user == req.user.id) {
       post.remove();
 
+    if(req.xhr) { 
+
+        return res.status(200).json({
+            data: {
+                post_id: req.params.id
+            },
+            message: 'Post Deleted Successfully'
+        });
+    }
+        
       // delete all the comments associated with the post in the comment data base
       await commentDataBase.deleteMany({ post: req.params.id });
       req.flash('success', 'Post and associated comments deleted');

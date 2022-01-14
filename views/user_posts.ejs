@@ -7,18 +7,21 @@
   </div>
 
   <!-- post area begins here -->
-  <div class="col-md-5 second-col overflow-auto">
+  <div class="col-md-5 second-col overflow-auto" >
         <!-- form to post begins here -->
         <%- include("_postform") -%>
         <!-- form to post ends here -->
         <br/>
 
         <!-- showing all the posts from the database starts here -->
+            <div class="col-md-12" id = 'postArea'>
+                <% for(post of posts) {%> 
+                    <%- include("_showpost") -%>
+                <br>
+                <% } %>
+            </div>
 
-        <% for(post of posts) {%> 
-            <%- include("_showpost") -%>
-        <br/>
-        <% } %>
+        
         <!-- showing all the posts from the database ends here -->
   </div>
   <!-- post area ends -->
@@ -44,3 +47,4 @@
          <!-- showing all the friends from the database ends here -->
   </div>
 </div>
+<script src = '/js/postform.js'></script>

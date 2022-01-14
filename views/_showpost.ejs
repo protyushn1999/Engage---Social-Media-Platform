@@ -1,4 +1,4 @@
-<div class="row each-post">
+<div class="row each-post" id = 'postid-<%= post._id%>'>
     <div class="col-md-12 ">
         <div class="row">
             <div class="col-md-2">
@@ -64,8 +64,7 @@
                 <div class="col-md-10">
                     <div class="row align-items-center">
                         <div class="col-md-8">
-                            <form action="/users/posts/createcomment" method="POST" style="
-                            width: 110%">
+                            <form action="/users/posts/createcomment" method="POST" style="width: 110%">
                                 <textarea class="form-control feed-post" rows="1" name="content"  required placeholder="Write a comment.." style="
                                 border: none;
                                 background-color: #c3d3ea"></textarea>

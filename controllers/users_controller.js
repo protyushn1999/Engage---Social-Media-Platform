@@ -147,6 +147,7 @@ try{
     module.exports.posts = async function(req,res) { 
     
         let posts = await postDataBase.find({})
+        .sort('-createdAt')
         .populate('user')
         //populating the comments and the user of the comments
         .populate({
