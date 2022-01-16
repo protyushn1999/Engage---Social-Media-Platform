@@ -71,7 +71,7 @@ let newPostDOM = function (post) {
  
          <hr>
 
-         <div class="row d-flex justify-content-center">
+         <div class="d-flex justify-content-center">
              <div class="col-md-4 align-self-center">
                 <i class="fas fa-heart"></i>  
              </div>
@@ -82,21 +82,32 @@ let newPostDOM = function (post) {
                 <button type="submit" class="btn btn-primary post-btn lcs">Share</button>
              </div> 
          </div>
-         
-         <br>
-            <div class="post-comments">
-                <form id="post-${post._id}-comments-form" action="/users/posts/createcomment" method="POST">
-                    <input type="text" name="content" placeholder="Type Here to add comment..." required>
-                    <input type="hidden" name="postId" value="${post._id}" >
-                    <button type = 'submit'>Comment</button>
-                </form>
-                <div class="post-comments-list">
-                    <ul id="post-comments-${post._id}">
-                    </ul>
+            <div class="post-comments d-flex align-items-baseline ">
+                <div class="col-md-2 ">
+                    <img src="https://cdn.dribbble.com/users/146798/screenshots/6273018/boo-dribbble_4x.jpg?compress=1&resize=1600x1200&vertical=top" class="rounded-circle" alt="Cinque Terre" width="50" height="50">
                 </div>
-            </div>   
+                <div class="col-md-10">
+                    
+                                <form id="post-${post._id}-comments-form" action="/users/posts/createcomment" method="POST" class ='d-flex align-items-center'>
+                                    <textarea  class="form-control feed-post" rows="1" name="content" style="
+                                    border: none;
+                                    background-color: #c3d3ea" placeholder = "Write a comment..." required>
+                                    </textarea>
+                                    <input type="hidden" name="postId" value="${post._id}" >
+                                    <button type = 'submit' class="btn btn-primary post-btn lcsnew">Comment</button>
+                                </form>
+                       
+                </div>
+            </div>
+            <hr>
+            <div  id="post-comments-${post._id}" class="row post-comments-list align-items-baseline d-flex flex-wrap">
+                
+
+                </div>
+            </div>
+        </div>
       </div>
-        <hr>
+        <br>
  </div>`);
 };
 

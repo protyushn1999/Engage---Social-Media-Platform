@@ -56,23 +56,19 @@
             
         </div>
         <!-- form to submit the comment starts-->
-        <div class="row align-items-center">
+        <div class="post-comments row d-flex align-items-baseline">
             <% if(locals.user) {%>
                 <div class="col-md-2 ">
                     <img src="https://cdn.dribbble.com/users/146798/screenshots/6273018/boo-dribbble_4x.jpg?compress=1&resize=1600x1200&vertical=top" class="rounded-circle" alt="Cinque Terre" width="50" height="50">
                 </div>
                 <div class="col-md-10">
-                    <div class="row align-items-center">
-                        <div class="col-md-8">
-                            <form action="/users/posts/createcomment" method="POST" style="width: 110%" id='post-<%= post._id%>-comments-form' >
+                            <form action="/users/posts/createcomment" method="POST" id='post-<%= post._id%>-comments-form'  class ='d-flex align-items-center'>
                                 <textarea class="form-control feed-post" rows="1" name="content"  required placeholder="Write a comment.." style="
                                 border: none;
                                 background-color: #c3d3ea"></textarea>
                                 <input type="hidden" name="postId" value="<%= post._id%>">   
-                                <button type="submit" class="btn btn-primary post-btn lcs" style="width:auto">Comment</button>
+                                <button type="submit" class="btn btn-primary post-btn lcsnew">Comment</button>
                             </form>
-                        </div>
-                    </div>
                 </div>
             
             <%}%>

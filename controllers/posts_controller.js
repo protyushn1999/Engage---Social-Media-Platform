@@ -115,20 +115,35 @@ try {
 
 
 // module to delete a comment from the post == > delete it from comment schema as well as from the post schema
-module.exports.deletecomment = function(req,res) {
-    commentDataBase.findById(req.params.id, function(err,comment) {
-        if(err) {
-            console.log('Error in finding the comment');
-            return res.redirect('/users/posts');
-        }
+module.exports.deletecomment = async function(req,res) {
+    try{
+        let comment = await commentDataBase.findById(req.params.id);
+
         if(comment && comment.user == req.user.id) {
             let postId = comment.post;
             comment.remove();
 
             //delete the comment from the post data base. the comments are stored in an array in each post in the post data base
-            postDataBase.findByIdAndUpdate(postId,{$pull : {comment: req.params.id}}, function(err,post) {
-                return res.redirect('/users/posts');
-            })
+            let post = await postDataBase.findByIdAndUpdate(postId, {$pull : {comment: req.params.id}});
+
+            if(req.xhr) {
+                return res.status(200).json({
+                    data: {
+                        comment_id: req.params.id
+                    },
+                    message: 'Comment Deleted Successfully'
+                })
+            }
+            req.flash('success', 'Comment deleted!');
+            return res.redirect('/users/posts');
+            
         }
-    })
+        else {
+            req.flash('error', 'Unauthorised');
+            return res.redirect('/users/posts');
+        }
+    }catch(err){
+        console.log('error',err);
+        return;
+    }
 }

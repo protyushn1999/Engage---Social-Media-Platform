@@ -26,6 +26,8 @@ class PostComments{
                     let newComment = pSelf.newCommentDOM(data.data.comment);
                     $(`#post-comments-${postId}`).prepend(newComment);
                     console.log("SUCESSS in showing the comment in the DOM");
+                    pSelf.deleteComment($(' .dropdown-item-del', newComment));
+                    console.log('SUCESSS in deleting the comment');
                 },
                 error: function(error) {
                     console.log(error.responseText);
@@ -37,20 +39,47 @@ class PostComments{
     newCommentDOM(comment) {
 
         return $(`
-       
-       
-        <li id="comment-${ comment._id }">
-            <p>
-                <small>
-                     <a class="delete-comment-button" href="/users/posts/deletecomment/${comment._id}">X</a>
-                </small>
-                    ${comment.content}
-                <br>
-                <small>
-                    ${comment.user.name}
-                </small>
-            </p>    
-        </li>`);
+       <div class="row" id="comment-${comment._id}">
+            <div class="col-md-2 align-items-center">
+                        <img src="https://cdn.dribbble.com/users/146798/screenshots/6284653/peach-dribbble_4x.jpg?compress=1&resize=1600x1200&vertical=top" class="rounded-circle" alt="Cinque Terre" width="50" height="50">
+            </div>
+
+            <div class="col-md-8 text-start"  id="comment-${comment._id}">
+                <h6>${comment.user.name}</h6>
+                <p>${comment.content}</p>
+            </div>
+
+            <div class="col-md-2">
+                <div class= "dropdown" >
+                <button class="btn btn-secondary dropdown-toggle post-btn" type="button" data-bs-toggle="dropdown" >
+                        <i class="fas fa-ellipsis-h"></i>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item-del" href="/users/posts/deletecomment/${comment._id}">Delete</a></li>
+                    </ul>
+                </div>     
+            </div>
+        </div>
+        
+        `);
+    }
+
+
+    deleteComment(deleteLink) {
+        $(deleteLink).click(function(e) {
+            e.preventDefault();
+
+            $.ajax({
+                type: 'GET',
+                url: $(deleteLink).prop('href'),
+                success: function(data) {
+                    $(`#comment-${data.data.comment_id}`).remove();
+                },
+                error: function(error) {
+                    console.log(error.responseText);
+                }
+            });
+        });
     }
 }
 
