@@ -64,14 +64,12 @@
                 <div class="col-md-10">
                     <div class="row align-items-center">
                         <div class="col-md-8">
-                            <form action="/users/posts/createcomment" method="POST" style="width: 110%">
+                            <form action="/users/posts/createcomment" method="POST" style="width: 110%" id='post-<%= post._id%>-comments-form' >
                                 <textarea class="form-control feed-post" rows="1" name="content"  required placeholder="Write a comment.." style="
                                 border: none;
                                 background-color: #c3d3ea"></textarea>
-                                <input type="hidden" name="postId" value="<%= post._id%>">
-                        </div>
-                        <div class="col-md-4">
-                            <button type="submit" class="btn btn-primary post-btn lcs" style="width:auto">Comment</button>
+                                <input type="hidden" name="postId" value="<%= post._id%>">   
+                                <button type="submit" class="btn btn-primary post-btn lcs" style="width:auto">Comment</button>
                             </form>
                         </div>
                     </div>
@@ -82,16 +80,19 @@
         <!-- form to submit the comment ends -->
         <hr>
         <!-- showing all the comments from the database -->
-        <div class="row align-items-center">
+        <div class="row align-items-center" id='post-comment-<%= post._id%>'>
             <% for(comment of post.comments) {%>
+                <!-- user profile photo -->
                 <div class="col-md-2 align-items-center">
                     <img src="https://cdn.dribbble.com/users/146798/screenshots/6284653/peach-dribbble_4x.jpg?compress=1&resize=1600x1200&vertical=top" class="rounded-circle" alt="Cinque Terre" width="50" height="50">
                 </div>
+                <!-- comment and user that commented -->
                 <div class="col-md-8 text-start">
                     <h6><%= comment.user.name%></h6>
                     <p><%= comment.content%></p>
                     
                 </div>
+                <!-- delete the comment button -->
                 <div class="col-md-2">
             
                 

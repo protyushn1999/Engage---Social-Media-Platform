@@ -5,24 +5,30 @@ const userDataBase = require('../models/user');
 // creating a post
 try{
     module.exports.createPost = async function(req,res) {
+        
         let postData = await postDataBase.create({
             content: req.body.feed_post,
             user: req.user._id
         });
-        let postByUserDetails = await userDataBase.findById(req.user._id);
+        //console.log('post id is', postData._id);
+        //let postByUserDetails = await userDataBase.findById(req.user._id).populate('name');
+        //let postUser = await postDataBase.findById(postData._id).populate('user');
+        //console.log(postUser);
 
-        console.log('*********' , postData);
-        console.log('*********' , postByUserDetails);
+        console.log('********* from pc' , postData);
+        //console.log('********* from pc1' , postByUserDetails);
 
         req.flash('success', 'Post created successfully');
         //return res.redirect('/users/posts');
 
         if(req.xhr) {
             
+            postData = await postData.populate('user', 'name');
+            //postData = await postData.populate('user','createdAt');
+            console.log('********* from pc2' , postData);
             return res.status(200).json({
                 data: {
-                    post: postData,
-                    userId: postByUserDetails
+                    post: postData
                 },
                 message: 'Post Created successfully - pc'
             });
@@ -35,31 +41,43 @@ try{
 }
 
 // creating a comment on the post
-module.exports.createcomment = function(req,res) { 
-    postDataBase.findById(req.body.postId, function(err,post) {
-        if(err) {
-            console.log('Error in finding the post');
-            return res.redirect('/users/posts');
-        }
-
-        if(post) {
-            commentDataBase.create({
+module.exports.createcomment = async function(req,res) { 
+    
+    try{
+            let post = await postDataBase.findById(req.body.postId);
+            if(post) {
+                let comment =  await commentDataBase.create({
                 content: req.body.content,
                 post: req.body.postId,
                 user: req.user._id
-            }, function(err,comment) {
-                if(err) {
-                    console.log('Error in creating the comment');
-                    return res.redirect('/users/posts');
-                }
+                });
 
                 post.comments.push(comment);
                 post.save();
+                
+
+                if (req.xhr){
+                    // Similar for comments to fetch the user's id!
+                    comment = await comment.populate('user', 'name');
+
+                    return res.status(200).json({
+                        data: {
+                            comment: comment
+                        },
+                        message: "Comment created!"
+                    });
+                }
+
                 req.flash('success', 'Comment Posted');
+
                 return res.redirect('/users/posts');
-            })
-        }
-    })
+                
+            }
+    }catch(err) {
+        console.log('Error in creating the comment', err);
+        return;
+    }
+        
 }
 
 // module to delete a post from the database

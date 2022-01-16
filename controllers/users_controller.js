@@ -188,7 +188,7 @@ module.exports.updateprofile = function(req,res) {
         })
     }
 }
-//update the user bio and other deatils and redirects the user to the same profile page again
+//update the user bio and other details and redirects the user to the same profile page again
 module.exports.updatebio = function(req,res) {
     if(req.params.id == req.user.id) {
         userDataBase.findByIdAndUpdate(req.params.id,{bio: req.body.bio, currentResidence: req.body.cur_res,  
