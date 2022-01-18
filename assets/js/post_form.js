@@ -56,7 +56,7 @@ let newPostDOM = function (post) {
                          <h6>${post.user.name}</h6>
                      </div>
                      <div class="col-md-12">
-                         <p> ${post.createdAt} </p>
+                         <p> ${post.user.createdAt} </p>
                      </div>
                  </div>
              </div>
@@ -81,7 +81,7 @@ let newPostDOM = function (post) {
  
          <hr>
 
-         <div class="d-flex justify-content-center">
+         <div class=" row d-flex justify-content-center">
              <div class="col-md-4 align-self-center">
                 <i class="fas fa-heart"></i>  
              </div>
@@ -92,32 +92,27 @@ let newPostDOM = function (post) {
                 <button type="submit" class="btn btn-primary post-btn lcs">Share</button>
              </div> 
          </div>
-            <div class="post-comments d-flex align-items-baseline ">
-                <div class="col-md-2 ">
+
+         <div class="post-comments row d-flex align-items-baseline ">
+            <div class="col-md-2 ">
                     <img src="${post.user.avatar}" class="rounded-circle" alt="Cinque Terre" width="50" height="50">
-                </div>
-                <div class="col-md-10">
-                    
-                                <form id="post-${post._id}-comments-form" action="/users/posts/createcomment" method="POST" class ='d-flex align-items-center'>
-                                    <textarea  class="form-control feed-post" rows="1" name="content" placeholder="Write a comment" style="
-                                    border: none;
-                                    background-color: #c3d3ea" required>
-                                    </textarea>
-                                    <input type="hidden" name="postId" value="${post._id}" >
-                                    <button type = 'submit' class="btn btn-primary post-btn lcsnew">Comment</button>
-                                </form>
-                       
-                </div>
             </div>
+            <div class="col-md-10">
+                    <form id="post-${post._id}-comments-form" action="/users/posts/createcomment" method="POST" class ='d-flex align-items-center'>
+                    <textarea class="form-control feed-post" rows="1" name="content"  required placeholder="Write a comment.." style="border: none; background-color: #c3d3ea"></textarea>
+                    <input type="hidden" name="postId" value="${post._id}" >
+                    <button type = 'submit' class="btn btn-primary post-btn lcsnew">Comment</button>
+                  </form>     
+            </div>
+          </div>
             <hr>
-            <div  id="post-comments-${post._id}" class="row post-comments-list align-items-baseline d-flex flex-wrap">
+
+          <div  id="post-comments-${post._id}" class="row post-comments-list        align-items-center">
                 
 
-                </div>
-            </div>
-        </div>
+          </div>
       </div>
-        <br>
+      
  </div>`);
 };
 

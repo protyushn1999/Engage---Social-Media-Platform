@@ -10,7 +10,7 @@
                         <h6><%= post.user.name %></h6>
                     </div>
                     <div class="col-md-12">
-                        <p><%= post.createdAt %></p>
+                        <p><%= moment(post.user.createdAt).format("MMM Do YY") %></p>
                     </div>
                 </div>
             </div>
@@ -76,36 +76,39 @@
         <!-- form to submit the comment ends -->
         <hr>
         <!-- showing all the comments from the database -->
-        <div class="row align-items-center" id='post-comment-<%= post._id%>'>
+        <div class="row post-comments-list align-items-center" id='post-comment-<%= post._id%>'>
             <% for(comment of post.comments) {%>
                 <!-- user profile photo -->
-                <div class="col-md-2 align-items-center">
-                    <img src="<%= comment.user.avatar%>" class="rounded-circle" alt="Cinque Terre" width="50" height="50">
-                </div>
-                <!-- comment and user that commented -->
-                <div class="col-md-8 text-start">
-                    <h6><%= comment.user.name%></h6>
-                    <p><%= comment.content%></p>
-                    
-                </div>
-                <!-- delete the comment button -->
-                <div class="col-md-2">
-            
+                <div class="row" id="comment-<%= comment._id%>" >
+                    <div class="col-md-2 align-items-center">
+                        <img src="<%= comment.user.avatar %>" class="rounded-circle" alt="Cinque Terre" width="50" height="50">
+                    </div>
+                    <!-- comment and user that commented -->
+                    <div class="col-md-8 text-start" id="comment-<%= comment._id%>" > 
+                        <h6><%= comment.user.name%></h6>
+                        <p><%= comment.content%></p>
+                        
+                    </div>
+                    <!-- delete the comment button -->
+                    <div class="col-md-2">
                 
-                    <% if(locals.user && locals.user.id == comment.user.id) { %>
                     
-                        <div class= "dropdown" >
-                            <button class="btn btn-secondary dropdown-toggle post-btn" type="button" data-bs-toggle="dropdown" >
-                                <i class="fas fa-ellipsis-h"></i>
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                            <li><a class="dropdown-item" href="/users/posts/deletecomment/<%= comment.id%>">Delete</a></li>
-                            </ul>
-                        </div>
+                        <% if(locals.user && locals.user.id == comment.user.id) { %>
                         
-                    <% } %>
-                        
+                            <div class= "dropdown" >
+                                <button class="btn btn-secondary dropdown-toggle post-btn" type="button" data-bs-toggle="dropdown" >
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li><a class="dropdown-item" href="/users/posts/deletecomment/<%= comment.id%>">Delete</a></li>
+                                </ul>
+                            </div>
+                            
+                        <% } %>
+                            
+                    </div>
                 </div>
+                
             <%}%>
         </div>
     </div>

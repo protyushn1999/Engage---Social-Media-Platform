@@ -1,6 +1,7 @@
 const postDataBase = require('../models/posts');
 const commentDataBase = require('../models/comments');
 const userDataBase = require('../models/user');
+const moment = require('moment');
 
 // creating a post
 try{
@@ -18,6 +19,9 @@ try{
             postData = await postData.populate('user', '-password');  // if we want to populate just the name of the user (we'll not want to send the password in the API), this is how we do it!
             //postData = await postData.populate('user','createdAt');
             console.log('********* from pc2' , postData);
+            console.log('*********  created at' , postData.user.createdAt);
+            let m = moment(postData.user.createdAt).format("MMM Do YY");
+            console.log(m);
             
             return res.status(200).json({
                 data: {
@@ -64,7 +68,7 @@ module.exports.createcomment = async function(req,res) {
                     });
                 }
                 req.flash('success', 'Comment created successfully');
-                return res.redirect('/users/posts');
+                return res.redirect('back');
                 
             }
     }catch(err) {
@@ -95,11 +99,11 @@ try {
                     });
             }
             req.flash('success', 'Post deleted successfully');
-            return res.redirect("/users/posts");
+            return res.redirect("back");
         } 
         else {
             req.flash('error', 'Post cant be deleted');
-            return res.redirect("/users/posts");
+            return res.redirect("back");
         }
   };
 } catch (err) {
@@ -131,12 +135,12 @@ module.exports.deletecomment = async function(req,res) {
                 })
             }
             req.flash('success', 'Comment deleted!');
-            return res.redirect('/users/posts');
+            return res.redirect('back');
             
         }
         else {
             req.flash('error', 'Unauthorised');
-            return res.redirect('/users/posts');
+            return res.redirect('back');
         }
     }catch(err){
         console.log('error',err);

@@ -72,6 +72,7 @@
     background-color: var(--primary);
     border-radius: 25px;
     padding: 1em 0em;
+    margin-bottom: 1em;
 }
 .lcs{
     width: 10em;

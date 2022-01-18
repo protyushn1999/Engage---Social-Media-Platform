@@ -11,6 +11,7 @@ const passportLocal = require('./config/passport-local');
 const MongoStore = require('connect-mongo');
 const flash = require('connect-flash');
 const customMware = require('./config/middleware');
+const moment = require('moment');
 //const sass = require('node-sass');
 
 
@@ -74,7 +75,8 @@ app.use(passport.setAuthenticatedUser);
 app.use(flash());
 app.use(customMware.setFlash);
 
-
+// using moment to format the timestamps
+app.locals.moment = require('moment');
 //setting the routes ==>  it means that all the '/' webpage will be redirect to ./routes folder
 app.use('/', require('./routes'));
 
