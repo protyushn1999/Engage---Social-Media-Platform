@@ -7,7 +7,7 @@
         <ul>
             <% if(locals.user) { %>
             <li>
-                <a href = "/users/posts" >
+                <a href = "/users/profile/<%= user._id %>">
                     <%= locals.user.name%>
                 </a>
                
@@ -21,18 +21,23 @@
             </li>
             <% } else { %>
                 <li>
-                    <button>
+                    
                         <a href = "/users/signin">
-                            Log in to Engage
+                            <button type="submit" class="btn btn-primary btn-lg main-post-btn">
+                                Log in to Engage
+                            </button>
+                           
                         </a>
-                    </button>
+                
                 </li>
                 <li>
-                    <button>
+                    
                         <a href = "/">
-                            Create New Account
+                            <button type="submit" class="btn btn-primary btn-lg main-post-btn">
+                            Create New Account  
+                        </button>
                         </a>
-                    </button>
+                   
                 </li>
     
             <% } %>

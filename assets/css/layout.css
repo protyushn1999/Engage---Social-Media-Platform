@@ -61,3 +61,19 @@ ul li button{
     cursor: pointer;
     font-size: initial;
 } 
+
+.post-btn{
+    border: none;
+    background-color: var(--secondary);
+}
+.post-btn:hover{
+    color: rgb(255, 255, 255);
+    background-color: var(--hover);
+}
+.main-post-btn{
+    background-color: var(--theme);
+    border: none;
+}
+.main-post-btn:hover{
+    background-color: #712156;
+}

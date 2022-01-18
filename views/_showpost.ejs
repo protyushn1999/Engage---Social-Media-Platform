@@ -2,7 +2,7 @@
     <div class="col-md-12 ">
         <div class="row">
             <div class="col-md-2">
-                <img src="https://cdn.dribbble.com/users/146798/screenshots/6327584/panda-dribbble_4x.jpg?compress=1&resize=1600x1200&vertical=top" class="rounded-circle" alt="Cinque Terre" width="50" height="50">
+                <img src="<%= post.user.avatar%>" class="rounded-circle" alt="Cinque Terre" width="50" height="50">
             </div>
             <div class="col-md-8 text-start">
                 <div class="row">
@@ -59,7 +59,7 @@
         <div class="post-comments row d-flex align-items-baseline">
             <% if(locals.user) {%>
                 <div class="col-md-2 ">
-                    <img src="https://cdn.dribbble.com/users/146798/screenshots/6273018/boo-dribbble_4x.jpg?compress=1&resize=1600x1200&vertical=top" class="rounded-circle" alt="Cinque Terre" width="50" height="50">
+                    <img src="<%= user.avatar%>" class="rounded-circle" alt="Cinque Terre" width="50" height="50">
                 </div>
                 <div class="col-md-10">
                             <form action="/users/posts/createcomment" method="POST" id='post-<%= post._id%>-comments-form'  class ='d-flex align-items-center'>
@@ -80,7 +80,7 @@
             <% for(comment of post.comments) {%>
                 <!-- user profile photo -->
                 <div class="col-md-2 align-items-center">
-                    <img src="https://cdn.dribbble.com/users/146798/screenshots/6284653/peach-dribbble_4x.jpg?compress=1&resize=1600x1200&vertical=top" class="rounded-circle" alt="Cinque Terre" width="50" height="50">
+                    <img src="<%= comment.user.avatar%>" class="rounded-circle" alt="Cinque Terre" width="50" height="50">
                 </div>
                 <!-- comment and user that commented -->
                 <div class="col-md-8 text-start">

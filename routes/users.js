@@ -24,12 +24,11 @@ router.get('/signout',usersController.destroySession);
 
 // setting the routes ==> it means that all the '/posts' webpage will be redirect to ./posts folder
 router.use('/posts', require('./posts'));
+
+// profile routes are handled here
 router.get('/profile/:id' ,passport.checkAuthentication, usersController.profile);
 router.post('/profile/updateprofile/:id', passport.checkAuthentication, usersController.updateprofile);
 router.post('/profile/updatebio/:id', passport.checkAuthentication, usersController.updatebio);
 router.post('/profile/updateprofileimage/:id', passport.checkAuthentication, usersController.updateprofileimage);
-
-
-// router.use('./profile', require('./profile'));
 
 module.exports = router;

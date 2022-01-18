@@ -1,25 +1,27 @@
 const userDataBase = require('../models/user');
 const postDataBase = require('../models/posts');
+const fs = require('fs');
+const path = require('path');
 const { log } = require('console');
 
 // render the sign up page
 module.exports.signUp = function(req,res) {
   if(req.isAuthenticated()) {
-    return res.redirect('/users/profile');
+    return res.redirect('/users/posts');
   }
   
   return res.render('user_sign_up',{
-        title: 'Socialley Sign Up'
+        title: 'Engage Sign Up Page'
     })
 }
 
 // render the sign in page
 module.exports.signIn = function(req,res) {
   if(req.isAuthenticated()) {
-    return res.redirect('/users/profile');
+    return res.redirect('/users/posts');
   }  
   return res.render('user_sign_in',{
-        title: 'Socialley Sign In'
+        title: 'Engage Sign In Page'
     })
 }
 
@@ -63,34 +65,31 @@ module.exports.createSession = function(req,res) {
 }
 
 // render the profile page
-module.exports.profile = function(req,res) { 
-    userDataBase.findById(req.params.id, function(err,user) {
-        if(err) {
-            console.log('error in finding the user');
-            return;
-        }
-        postDataBase.find({user: req.params.id})
-            .populate({
-                path : 'comments',
-                populate : {
-                    path: 'user'
-                }
-            })
-            .exec(function(err, posts_by_user) {
-                if(err) { 
-                    console.log('error in fetching the posts');
-                    return;
-                }
+module.exports.profile = async function(req,res) { 
+    
+    try{ 
+        let user = await userDataBase.findById(req.params.id);
+
+        let posts_by_user = await postDataBase.find({user: req.params.id})
+                            .populate({
+                                path : 'comments',
+                                    populate : {
+                                        path: 'user'
+                                    } // populate the user of the comment
+                            })
+                            .exec();
                 //console.log(posts_by_user);
-                return res.render('user_profile',{
+                
+    return res.render('user_profile',{
                 title: 'User Profile',
                 profile_user: user,
                 posts: posts_by_user
-                })
-
-            })
-                
-    })
+            }   
+    );
+    } catch(err) {
+        console.log('Error', err);
+        return;
+    }
 }
 
 // render the posts page
@@ -141,8 +140,8 @@ module.exports.profile = function(req,res) {
 //          })    
 //     })
 // }
-//render the posts page using async await function
 
+//render the posts page using async await function
 try{
     module.exports.posts = async function(req,res) { 
     
@@ -156,9 +155,10 @@ try{
                 path: 'user'
             }
         });
-    
-        let all_users = await userDataBase.find({});
-    
+        // find all the users except the logged in user from the user database to show on the friends list
+        let all_users = await userDataBase.find({_id: { $ne: req.user._id }});
+        //const users = User.find({ _id: { $ne: user._id } })
+        //UsersModel.find({ email: { $ne: 'testemail@email.com' } })
     
         return res.render('user_posts',{
             title: 'User Posts',
@@ -184,18 +184,26 @@ module.exports.updateprofileimage = async function(req, res) {
                     return;
                 }
                 // console.log(req);
-                // console.log('********************', req.body);
                 // console.log('******* req.user', req.user);
-                user.avatar = userDataBase.avatarPath + '/' + req.file.filename;
+                if(req.file) {
+                    
+                    if(user.avatar && fs.existsSync(path.join(__dirname,'..',user.avatar))) {
+                        fs.unlinkSync(path.join(__dirname,'..',user.avatar));
+                    }
+                    
+                    user.avatar = userDataBase.avatarPath + '/' + req.file.filename;
+
+                }
                 user.save();
                 console.log("********* req.file", req.file);
-                console.log('******* req.user again', req.user);
+                req.flash('success', 'Profile Picture Updated');
                 return res.redirect('back');
             })
             
         }
         else {
             console.log('You are not authorized to update the profile image');
+            req.flash('error','Not authorized to update the profile image!');
             return res.redirect('back');
             
         }
@@ -215,10 +223,12 @@ module.exports.updateprofile = async function(req,res) {
                 let user = await userDataBase.findByIdAndUpdate(req.params.id,{name: req.body.name, email: req.body.email});
                 user.save();
                 console.log(user);
+                req.flash('success', 'User Picture Updated!');
                 return res.redirect('back');
         }
         else{
                 console.log('You are not authorized to update the profile');
+                req.flash('error','Not authorized to update the profile!');
                 return res.redirect('back');
         }
         
@@ -228,22 +238,24 @@ module.exports.updateprofile = async function(req,res) {
     }
 }
 //update the user bio and other details and redirects the user to the same profile page again
-module.exports.updatebio = function(req,res) {
-    if(req.params.id == req.user.id) {
-        userDataBase.findByIdAndUpdate(req.params.id,{bio: req.body.bio, currentResidence: req.body.cur_res,  
-            permanentResidence: req.body.per_res, 
-            relationships: req.body.rel_stat,
-             hobbies: req.body.hobbies}, function(err,user) {
-            if(err) {
-                console.log('Error in updating the user bio');
-                return;
-            }
-            console.log(user);
-            return res.redirect('back');
-        })
+module.exports.updatebio = async function(req,res) {
+    try{
+        if(req.params.id == req.user.id) {
+            let user = await userDataBase.findByIdAndUpdate(req.params.id,{bio: req.body.bio, currentResidence: req.body.cur_res,  
+                permanentResidence: req.body.per_res, 
+                relationships: req.body.rel_stat,
+                 hobbies: req.body.hobbies});
+    
+                console.log(user);
+                req.flash('success', 'User Bio Updated!');
+                return res.redirect('back');
+        }
+    } catch(err) {
+        console.log('Error', err);
+        return;
     }
+    
 }
-
 
 
 // logout the user and redirect to the sign in page

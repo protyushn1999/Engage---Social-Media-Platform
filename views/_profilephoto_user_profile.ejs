@@ -4,7 +4,7 @@
             <div class="col-md-4 profile-img">
                 <button type="button" class="btn btn-primary rounded-circle" data-bs-toggle="modal"
                         data-bs-target="#exampleModal2" style= "border: none;background: none;" >
-                        <img src="<%= user.avatar%>" class="rounded-circle" alt="Cinque Terre" width="150" height="150">
+                        <img src="<%= profile_user.avatar%>" class="rounded-circle" alt="Cinque Terre" width="150" height="150">
                 </button>
                 <% if(profile_user.id==locals.user._id) {%>
                 <div class="modal fade " id="exampleModal2" tabindex="-1">

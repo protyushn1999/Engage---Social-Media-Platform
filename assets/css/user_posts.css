@@ -7,6 +7,7 @@
 .noextramargin{
     margin-right: 0px;
     margin-left: 0px;
+    margin-bottom: 1em;
 }
 .align{
     height: 100vh;
@@ -62,7 +63,7 @@
 .main-post-btn{
     background-color: var(--theme);
     border: none;
-    width:25%;
+    padding: 0.5em 1em;
 }
 .main-post-btn:hover{
     background-color: #712156;

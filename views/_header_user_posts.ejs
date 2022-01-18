@@ -1,0 +1,26 @@
+<div class="row header">
+    <div class="col-md-4">
+        <a href="/users/posts/">
+            <img src="/images/engage with logo.png" width="140" height="70">
+        </a>
+        
+    </div>
+    <div class="col-md-8">
+        <ul>
+            <li >
+                <a href = "/users/profile/<%= user._id %>" class='d-flex align-items-center'>
+                    <img src="<%= user.avatar%>" alt="user profile image" width="50" height="50" class="rounded-circle mx-2">
+                    <h6><%= locals.user.name%></h6>
+                </a>
+            </li>
+            <li>
+                <a href = "/users/signout">
+                    <button type="submit" class="btn btn-primary btn-lg main-post-btn">
+                        Sign Out
+                    </button>
+                       
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

@@ -13,19 +13,12 @@ try{
         //console.log('post id is', postData._id);
         //let postByUserDetails = await userDataBase.findById(req.user._id).populate('name');
         //let postUser = await postDataBase.findById(postData._id).populate('user');
-        //console.log(postUser);
-
-        console.log('********* from pc' , postData);
-        //console.log('********* from pc1' , postByUserDetails);
-
-        req.flash('success', 'Post created successfully');
-        //return res.redirect('/users/posts');
-
         if(req.xhr) {
-            
-            postData = await postData.populate('user', 'name');
+            // it means populate all the fields of user except password
+            postData = await postData.populate('user', '-password');  // if we want to populate just the name of the user (we'll not want to send the password in the API), this is how we do it!
             //postData = await postData.populate('user','createdAt');
             console.log('********* from pc2' , postData);
+            
             return res.status(200).json({
                 data: {
                     post: postData
@@ -33,6 +26,9 @@ try{
                 message: 'Post Created successfully - pc'
             });
         }
+        
+        req.flash('success', 'Post created successfully');
+        return res.redirect('back');
         
     }
 }catch(err){
@@ -58,8 +54,8 @@ module.exports.createcomment = async function(req,res) {
 
                 if (req.xhr){
                     // Similar for comments to fetch the user's id!
-                    comment = await comment.populate('user', 'name');
-
+                    comment = await comment.populate('user', '-password');
+                    
                     return res.status(200).json({
                         data: {
                             comment: comment
@@ -67,13 +63,12 @@ module.exports.createcomment = async function(req,res) {
                         message: "Comment created!"
                     });
                 }
-
-                req.flash('success', 'Comment Posted');
-
+                req.flash('success', 'Comment created successfully');
                 return res.redirect('/users/posts');
                 
             }
     }catch(err) {
+        req.flash('error', 'Comment cant be created');
         console.log('Error in creating the comment', err);
         return;
     }
@@ -82,34 +77,34 @@ module.exports.createcomment = async function(req,res) {
 
 // module to delete a post from the database
 try {
-  module.exports.deletepost = async function (req, res) {
-    let post = await postDataBase.findById(req.params.id);
+    module.exports.deletepost = async function (req, res) {
+        let post = await postDataBase.findById(req.params.id);
 
-    if (post && post.user == req.user.id) {
-      post.remove();
+        if (post && post.user == req.user.id) {
+            post.remove(); 
+            // delete all the comments associated with the post in the comment data base
+            await commentDataBase.deleteMany({ post: req.params.id });
 
-    if(req.xhr) { 
-
-        return res.status(200).json({
-            data: {
-                post_id: req.params.id
-            },
-            message: 'Post Deleted Successfully'
-        });
-    }
-        
-      // delete all the comments associated with the post in the comment data base
-      await commentDataBase.deleteMany({ post: req.params.id });
-      req.flash('success', 'Post and associated comments deleted');
-      return res.redirect("/users/posts");
-    } else {
-        req.flash('error', 'Post cant be deleted');
-        return res.redirect("/users/posts");
-    }
+            if(req.xhr) { 
+                    
+                    return res.status(200).json({
+                        data: {
+                            post_id: req.params.id
+                        },
+                        message: 'Post Deleted Successfully'
+                    });
+            }
+            req.flash('success', 'Post deleted successfully');
+            return res.redirect("/users/posts");
+        } 
+        else {
+            req.flash('error', 'Post cant be deleted');
+            return res.redirect("/users/posts");
+        }
   };
 } catch (err) {
-  console.log("Error", err);
-  req.flash('error', err);
+    console.log("Error", err);
+    req.flash('error', err);
 }
 
 
@@ -127,6 +122,7 @@ module.exports.deletecomment = async function(req,res) {
             let post = await postDataBase.findByIdAndUpdate(postId, {$pull : {comment: req.params.id}});
 
             if(req.xhr) {
+                
                 return res.status(200).json({
                     data: {
                         comment_id: req.params.id

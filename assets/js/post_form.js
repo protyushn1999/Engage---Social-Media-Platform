@@ -22,6 +22,16 @@ let postForm = function () {
 
         // call the create comment class method
         new PostComments(post.data.post._id);
+        // show the notification using Noty
+        new Noty({
+          theme: 'sunset',
+          text: "Post created successfully",
+          type: 'success',
+          layout: 'bottomRight',
+          timeout: 500
+          
+      }).show();
+
         console.log(post.data.post._id);
       },
       error: function (err) {
@@ -38,7 +48,7 @@ let newPostDOM = function (post) {
      <div class="col-md-12 ">
          <div class="row">
              <div class="col-md-2">
-                 <img src="https://cdn.dribbble.com/users/146798/screenshots/6327584/panda-dribbble_4x.jpg?compress=1&resize=1600x1200&vertical=top" class="rounded-circle" alt="Cinque Terre" width="50" height="50">
+                 <img src="${post.user.avatar}" class="rounded-circle" alt="Cinque Terre" width="50" height="50">
              </div>
              <div class="col-md-8 text-start">
                  <div class="row">
@@ -84,14 +94,14 @@ let newPostDOM = function (post) {
          </div>
             <div class="post-comments d-flex align-items-baseline ">
                 <div class="col-md-2 ">
-                    <img src="https://cdn.dribbble.com/users/146798/screenshots/6273018/boo-dribbble_4x.jpg?compress=1&resize=1600x1200&vertical=top" class="rounded-circle" alt="Cinque Terre" width="50" height="50">
+                    <img src="${post.user.avatar}" class="rounded-circle" alt="Cinque Terre" width="50" height="50">
                 </div>
                 <div class="col-md-10">
                     
                                 <form id="post-${post._id}-comments-form" action="/users/posts/createcomment" method="POST" class ='d-flex align-items-center'>
-                                    <textarea  class="form-control feed-post" rows="1" name="content" style="
+                                    <textarea  class="form-control feed-post" rows="1" name="content" placeholder="Write a comment" style="
                                     border: none;
-                                    background-color: #c3d3ea" placeholder = "Write a comment..." required>
+                                    background-color: #c3d3ea" required>
                                     </textarea>
                                     <input type="hidden" name="postId" value="${post._id}" >
                                     <button type = 'submit' class="btn btn-primary post-btn lcsnew">Comment</button>
@@ -122,6 +132,14 @@ let deletePost = function (deleteLink) {
       url: $(deleteLink).prop("href"),
       success: function (data) {
         $(`#postid-${data.data.post_id}`).remove();
+        new Noty({
+          theme: 'sunset',
+          text: "Posts deleted successfully",
+          type: 'success',
+          layout: 'bottomRight',
+          timeout: 500
+          
+      }).show();
       },
       error: function (err) {
         console.log(err.responseText);
