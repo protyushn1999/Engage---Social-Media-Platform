@@ -29,6 +29,7 @@ const customMware = require('./config/middleware');
 app.use(express.urlencoded());
 app.use(cookieParser());
 app.use(express.static('./assets'));
+app.use('/uploads', express.static(__dirname + '/uploads'));
 
 //using the express layouts for the layout
 app.use(expressLayouts);
@@ -52,7 +53,7 @@ app.use(session({
     },
     store: MongoStore.create(
         { 
-        mongoUrl: 'mongodb://localhost/socialley-development' ,
+        mongoUrl: 'mongodb://localhost/enagage-development' ,
         autoRemove: 'disabled'
         },
         function(err){

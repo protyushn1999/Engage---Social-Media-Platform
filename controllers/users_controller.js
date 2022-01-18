@@ -77,7 +77,7 @@ module.exports.profile = function(req,res) {
                 }
             })
             .exec(function(err, posts_by_user) {
-                if(err) {
+                if(err) { 
                     console.log('error in fetching the posts');
                     return;
                 }
@@ -173,19 +173,58 @@ try{
 }
 
 
+// update the user profile image and redirects him to the profile page
+module.exports.updateprofileimage = async function(req, res) {
+    try{
+        if(req.user.id == req.params.id) {
+            let user = await userDataBase.findById(req.params.id);
+            userDataBase.uploadedAvatar(req,res,function(err) {
+                if(err) {
+                    console.log("Error in multer", err);
+                    return;
+                }
+                // console.log(req);
+                // console.log('********************', req.body);
+                // console.log('******* req.user', req.user);
+                user.avatar = userDataBase.avatarPath + '/' + req.file.filename;
+                user.save();
+                console.log("********* req.file", req.file);
+                console.log('******* req.user again', req.user);
+                return res.redirect('back');
+            })
+            
+        }
+        else {
+            console.log('You are not authorized to update the profile image');
+            return res.redirect('back');
+            
+        }
+
+    }catch(err) {
+        console.log('Error', err);
+        return;
+    }
+}
+
 
 // update the user profile and redirects the user to the profile page
-module.exports.updateprofile = function(req,res) {
-    if(req.params.id == req.user.id) {
-        userDataBase.findByIdAndUpdate(req.params.id,{name: req.body.name, email: req.body.email},
-             function(err,user) {
-            if(err) {
-                console.log('Error in updating the user profile');
-                return;
-            }
-            console.log(user);
-            return res.redirect('back');
-        })
+module.exports.updateprofile = async function(req,res) {
+    
+    try{
+        if(req.params.id == req.user.id) {
+                let user = await userDataBase.findByIdAndUpdate(req.params.id,{name: req.body.name, email: req.body.email});
+                user.save();
+                console.log(user);
+                return res.redirect('back');
+        }
+        else{
+                console.log('You are not authorized to update the profile');
+                return res.redirect('back');
+        }
+        
+    }catch(err) {
+        console.log('Error', err);
+        return;
     }
 }
 //update the user bio and other details and redirects the user to the same profile page again
@@ -204,7 +243,6 @@ module.exports.updatebio = function(req,res) {
         })
     }
 }
-
 
 
 

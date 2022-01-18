@@ -12,15 +12,14 @@
         <%- include("_postform") -%>
         <!-- form to post ends here -->
         <br/>
-
         <!-- showing all the posts from the database starts here -->
-            <div class="col-md-12" id = 'postArea'>
-                <% for(post of posts) {%> 
-                    <%- include("_showpost") -%>
-                <br>
-                <% } %>
-            </div>
 
+        <div class="col-md-12" id = 'postArea'>
+            <% for(post of posts) {%> 
+                <%- include("_showpost") -%>
+            <br>
+            <% } %>
+        </div>
         
         <!-- showing all the posts from the database ends here -->
   </div>

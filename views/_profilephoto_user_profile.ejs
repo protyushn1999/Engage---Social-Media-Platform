@@ -2,8 +2,34 @@
     <div class="col-md-12 ">
         <div class="row align-items-end justify-content-start edit-profile-sec">
             <div class="col-md-4 profile-img">
-                <img src="https://cdn.dribbble.com/users/146798/screenshots/6327584/panda-dribbble_4x.jpg?compress=1&resize=1600x1200&vertical=top"
-                    class="rounded-circle" alt="Cinque Terre" width="150" height="150">
+                <button type="button" class="btn btn-primary rounded-circle" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal2" style= "border: none;background: none;" >
+                        <img src="<%= user.avatar%>" class="rounded-circle" alt="Cinque Terre" width="150" height="150">
+                </button>
+                <% if(profile_user.id==locals.user._id) {%>
+                <div class="modal fade " id="exampleModal2" tabindex="-1">
+                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                        <div class="modal-content ">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Change Profile Image</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal">
+                                </button>
+                            </div>
+                            <div class="modal-body justify-content-center">
+                                <form action="/users/profile/updateprofileimage/<%= profile_user.id%>" method="POST" enctype="multipart/form-data">
+                                    <div class="mb-3">
+                                        <input type="file" class="form-control" name="avatar"
+                                            placeholder="Add a avatar to your profile" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <button type="submit"class="btn btn-primary main-post-btn">Update</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <% } %>
             </div>
             <div class="col-md-4 text-start profile-img">
                 <h3>
@@ -27,8 +53,7 @@
                             <div class="modal-content ">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="exampleModalLabel">Edit Profile</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close">
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal">
                                     </button>
                                 </div>
                                 <div class="modal-body justify-content-center">
@@ -43,7 +68,6 @@
                                         <div class="mb-3">
                                             <button type="submit"class="btn btn-primary main-post-btn">Update</button>
                                         </div>
-                                    </form>
                                     </form>
                                 </div>
                             </div>

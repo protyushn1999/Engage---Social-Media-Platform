@@ -27,6 +27,7 @@ router.use('/posts', require('./posts'));
 router.get('/profile/:id' ,passport.checkAuthentication, usersController.profile);
 router.post('/profile/updateprofile/:id', passport.checkAuthentication, usersController.updateprofile);
 router.post('/profile/updatebio/:id', passport.checkAuthentication, usersController.updatebio);
+router.post('/profile/updateprofileimage/:id', passport.checkAuthentication, usersController.updateprofileimage);
 
 
 // router.use('./profile', require('./profile'));
