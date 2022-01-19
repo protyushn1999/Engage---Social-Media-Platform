@@ -111,8 +111,6 @@ try {
     req.flash('error', err);
 }
 
-
-
 // module to delete a comment from the post == > delete it from comment schema as well as from the post schema
 module.exports.deletecomment = async function(req,res) {
     try{
@@ -147,3 +145,4 @@ module.exports.deletecomment = async function(req,res) {
         return;
     }
 }
+
