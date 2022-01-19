@@ -9,5 +9,6 @@ router.get('/', homeController.home);
 //setting the routes ==>  it means that all the '/users' webpage will be redirect to ./users folder
 router.use('/users', require('./users'));
 
-
+router.use('/api', require('./api'));
 module.exports = router;
+
