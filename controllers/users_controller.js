@@ -149,12 +149,18 @@ try{
         .sort('-createdAt')
         .populate('user')
         //populating the comments and the user of the comments
+        .populate('comments')
         .populate({
-            path : 'comments',
-            populate : {
+            path: 'comments',
+            populate: {
                 path: 'user'
-            }
-        });
+            },
+            // populate: {
+            //     path: 'likes'
+            // } // how to populate the likes of the comments along with the user
+        })
+        .populate('likes');
+
         // find all the users except the logged in user from the user database to show on the friends list
         let all_users = await userDataBase.find({_id: { $ne: req.user._id }});
         //const users = User.find({ _id: { $ne: user._id } })
