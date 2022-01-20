@@ -19,6 +19,7 @@
     <link rel="shortcut icon" href="/images/Logo.png" type="image/x-icon" />
     <link rel="stylesheet" href="/css/layout.css" />
     <%- style%>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
@@ -26,7 +27,7 @@
 
     <%- body%>
         <!-- <%- include('_footer') %> -->
-
+            <!-- <script src="/js/layout.js"></script> -->
             <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
                 integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
                 crossorigin="anonymous"></script>
@@ -36,7 +37,7 @@
 
             <%- script%>
                 <script src="https://kit.fontawesome.com/c622d74338.js" crossorigin="anonymous"></script>
-
+                
                 <script>
       <% if (flash.success && flash.success.length > 0) { %>;
                         new Noty({
@@ -62,3 +63,13 @@
 </body>
 
 </html>
+
+
+<!-- This can be used for arbitrary zoom levels, just by using that proportion for scale, and the inverse of that proportion for width/height.
+
+body {
+  width: 200%;
+  height: 200%;
+  transform-origin: top left;
+  transform: scale(50%);
+} -->

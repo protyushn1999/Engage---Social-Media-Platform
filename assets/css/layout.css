@@ -19,6 +19,24 @@ body{
     overflow-x: hidden;
     font-family: 'Nunito', sans-serif;
 }
+
+/* @media (min-width: 1400px)  { 
+   html{
+        
+        width: 140%;
+        height: 140%;
+        transform-origin: top left;
+        transform: scale(80%);
+    }
+} */
+/* @media (max-height: 800px) {
+    html{
+        height: 100%;
+        width: 100%;
+        transform-origin: top left;
+        transform: scale(80%);
+    }
+} */
 a{
     
     text-decoration: none;

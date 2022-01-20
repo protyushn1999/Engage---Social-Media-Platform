@@ -20,6 +20,10 @@ router.post('/create-session', passport.authenticate(
         {failureRedirect: '/users/signin'}
 ) , usersController.createSession);
 
+// use passport oauth strategy as a way to handle authentication
+router.get('/auth/google', passport.authenticate('google', {scope: ['profile', 'email']}));
+router.get('/auth/google/callback', passport.authenticate('google',{failureRedirect: '/users/sign-in'}), usersController.createSession);
+
 router.get('/signout',usersController.destroySession);
 
 // setting the routes ==> it means that all the '/posts' webpage will be redirect to ./posts folder
