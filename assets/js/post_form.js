@@ -22,6 +22,9 @@ let postForm = function () {
 
         // call the create comment class method
         new PostComments(post.data.post._id);
+        // call the toggle like class method
+        new ToggleLike($(' .toggle-like-button', newPost));
+
         // show the notification using Noty
         new Noty({
           theme: 'sunset',
@@ -82,12 +85,13 @@ let newPostDOM = function (post) {
          <hr>
 
          <div class=" row d-flex justify-content-center">
-             <div class="col-md-4 align-self-center">
-                <i class="fas fa-heart"></i>  
-             </div>
              <div class="col-md-4">
-                <button type="submit" class="btn btn-primary post-btn lcs">Like</button>
-             </div>
+             
+                <a class="toggle-like-button" data-likes="0" href="/users/posts/likes/toggle/?id=${post._id}&type=post">
+                <span id = 'likeNo'>${post.likes.length}</span>
+                  Likes
+                </a>
+              </div>
              <div class="col-md-4">
                 <button type="submit" class="btn btn-primary post-btn lcs">Share</button>
              </div> 
@@ -107,7 +111,7 @@ let newPostDOM = function (post) {
           </div>
             <hr>
 
-          <div  id="post-comments-${post._id}" class="row post-comments-list        align-items-center">
+          <div  id="post-comments-${post._id}" class="row post-comments-list align-items-center">
                 
 
           </div>
@@ -155,6 +159,7 @@ let convertPostsToAJAX = function() {
       let postId = self.prop('id').split('-')[1];
 
       new PostComments(postId);
+      new ToggleLike($(" .toggle-like-button", self));
    });
 }
 

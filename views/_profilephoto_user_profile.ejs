@@ -74,7 +74,12 @@
                         </div>
                     </div>
 
-                    <% } %>
+                <% } %>
+                <% if(profile_user.id != locals.user._id) {%>
+            
+                <a href = '/users/sendfriendreq/?id=<%= profile_user.id%>' class = 'btn btn-primary post-btn'>Add Friend</a>
+
+                <% } %>
             </div>
         </div>
     </div>
