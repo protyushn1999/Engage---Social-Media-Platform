@@ -152,9 +152,17 @@ try{
         .populate('comments')
         .populate({
             path: 'comments',
-            populate: {
-                path: 'user'
-            },
+            populate: [
+                {
+                    path: 'user'
+                },
+                {
+                    path: 'likes'
+                }
+            ]
+            // populate: {
+            //     path: 'user'
+            // },
             // populate: {
             //     path: 'likes'
             // } // how to populate the likes of the comments along with the user

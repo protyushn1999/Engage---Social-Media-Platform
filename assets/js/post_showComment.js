@@ -7,6 +7,10 @@ class PostComments{
         this.createComment(postId);
         let self = this;
         //call for all existing comments
+
+        $(' .dropdown-item-del', this.postContainer).each(function() {
+            self.deleteComment($(this));
+        });
         
     }
 
@@ -29,7 +33,7 @@ class PostComments{
                     pSelf.deleteComment($(' .dropdown-item-del', newComment));
                     new Noty({
                         theme: 'sunset',
-                        text: "Comment created successfully",
+                        text: "Comment created successfully from ajax",
                         type: 'success',
                         layout: 'bottomRight',
                         timeout: 500
@@ -62,7 +66,7 @@ class PostComments{
                         <i class="fas fa-ellipsis-h"></i>
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item-del" href="/users/posts/deletecomment/${comment._id}">Delete</a></li>
+                        <li><a class="dropdown-item-del delete-comment-button" href="/users/posts/deletecomment/${comment._id}">Delete</a></li>
                     </ul>
                 </div>     
             </div>
@@ -81,6 +85,7 @@ class PostComments{
                 url: $(deleteLink).prop('href'),
                 success: function(data) {
                     $(`#comment-${data.data.comment_id}`).remove();
+                    console.log("deleted the comment using ajax");
                     new Noty({
                         theme: 'sunset',
                         text: "Comment deleted successfully",

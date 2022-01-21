@@ -67,7 +67,7 @@ module.exports.createcomment = async function(req,res) {
                         message: "Comment created!"
                     });
                 }
-                req.flash('success', 'Comment created successfully');
+                req.flash('success', 'Comment created successfully from post controller');
                 return res.redirect('back');
                 
             }

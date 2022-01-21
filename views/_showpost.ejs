@@ -1,5 +1,5 @@
 <div class="row each-post" id = 'postid-<%= post._id%>'>
-    <div class="col-md-12 ">
+    <div class="col-md-12">
         <div class="row">
             <div class="col-md-2">
                 <img src="<%= post.user.avatar%>" class="rounded-circle" alt="Cinque Terre" width="50" height="50">
@@ -24,7 +24,7 @@
                             <i class="fas fa-ellipsis-h"></i>
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" href="/users/posts/deletepost/<%= post.id%>">Delete</a></li>
+                        <li><a class="dropdown-item delete-post-button" href="/users/posts/deletepost/<%= post.id%>">Delete</a></li>
                         </ul>
                     </div>
                     
@@ -79,7 +79,7 @@
         <!-- form to submit the comment ends -->
         <hr>
         <!-- showing all the comments from the database -->
-        <div class="row post-comments-list align-items-center" id='post-comment-<%= post._id%>'>
+        <div class="row post-comments-list align-items-center" id='post-comments-<%= post._id%>'>
             <% for(comment of post.comments) {%>
                 <!-- user profile photo -->
                 <div class="row" id="comment-<%= comment._id%>" >
@@ -103,7 +103,7 @@
                                     <i class="fas fa-ellipsis-h"></i>
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                <li><a class="dropdown-item" href="/users/posts/deletecomment/<%= comment.id%>">Delete</a></li>
+                                <li><a class="dropdown-item-del delete-comment-button" href="/users/posts/deletecomment/<%= comment.id%>">Delete</a></li>
                                 </ul>
                             </div>
                             

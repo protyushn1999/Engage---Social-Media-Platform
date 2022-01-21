@@ -66,7 +66,7 @@ let newPostDOM = function (post) {
                              <i class="fas fa-ellipsis-h"></i>
                          </button>
                          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                         <li><a class="dropdown-item" href="/users/posts/deletepost/${post._id}">Delete</a></li>
+                         <li><a class="dropdown-item delete-post-button" href="/users/posts/deletepost/${post._id}">Delete</a></li>
                          </ul>
                     </div>       
              </div>
@@ -143,4 +143,21 @@ let deletePost = function (deleteLink) {
   });
 };
 
+    // loop over all the existing posts on the page (when the window loads for the first time) and call the delete post method on delete link of each, also add AJAX (using the class we've created) to the delete button of each
+
+// method to convert all posts to AJAX responses
+let convertPostsToAJAX = function() {
+   $(".each-post").each(function() {
+      let self = $(this);
+      let deleteButton = $(' .delete-post-button', self);
+      deletePost(deleteButton);
+
+      let postId = self.prop('id').split('-')[1];
+
+      new PostComments(postId);
+   });
+}
+
+
 postForm();
+convertPostsToAJAX();
