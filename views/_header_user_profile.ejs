@@ -1,19 +1,29 @@
-<div class="row header">
-    <div class="col-md-4">
-        <a href="/users/posts/">
-            <img src="/images/engage with logo.png" width="140" height="70">
-        </a>
-    </div>
-    <div class="col-md-8">
-        <ul>
-            <li>
-                <a href = "/users/signout">
-                    <button type="submit" class="btn btn-primary btn-lg main-post-btn">
-                        Sign Out
-                    </button>
-                       
+<div class="row header justify-content-center">
+    <div class="col-md-12 d-flex ">
+        <div class="col-md-5 d-flex align-items-center first-col-header ">
+            <form action="/users/posts/search" method="get" id = "searchuser"   class="form ">
+                <input type="search"  class="searchinput" name="search" id="search" placeholder="Search.." required>
+                <a href="/users/posts/search"> <i class="fa fa-search" id = search-btn></i></a>
+            </form>
+        </div>
+            
+        
+        <div class="col-md-7 d-flex align-items-center justify-content-end">
+            <ul class ='top-nav-bar d-flex justify-content-evenly'>
+                <a href="/users/posts" class ="a-list">
+                    <li class=" navbar-list"><i class="fa fa-home"></i></li>
                 </a>
-            </li>
-        </ul>
+                <a href="/users/profile/<%= user.id%>" class ="a-list">
+                    <li class=" navbar-list"><i class="fa fa-user"></i>Profile</li>
+                </a>
+                <!-- <li class="active navbar-list"><i class="fa fa-home"></i></li>
+                <li class="navbar-list"><i class="fa fa-user"></i></li> -->
+                <li class="navbar-list"><i class="fa fa-bell"></i></li>
+                <li class="navbar-list"><i class="fa fa-cog"></i></li>
+            </ul>
+        </div>
     </div>
+    
 </div>
+
+<script src="/js/post-page.js"></script>

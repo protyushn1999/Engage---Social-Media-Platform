@@ -2,15 +2,101 @@
 
 <%- include('_header_user_posts')%>
 
-<div class="row posts-body align-items-start justify-content-center">
-  <div class="first-col align overflow-scroll">
-    <div class="row">
-        imp links
-    </div>
+<div class="row  posts-body align-items-start justify-content-center">
+  
+    <div class="first-col align overflow-scroll">
+        <div class="row newcss">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-12 d-flex justify-content-start">
+                        <a href="/users/posts/">
+                            <img src="/images/engage with logo.png" width="100" height="50" class="img-responsive mx-3 mb-2 mt-2">
+                        </a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul class="d-flex flex-column align-items-center">
+                            <li>
+                                <a href = "/users/profile/<%= user._id %>" class=' align-items-center'>
+                                    <img src="<%= user.avatar%>" alt="user profile image" width="150" height="150" class="rounded-circle mx-2 profile-image">
+                                    <h6><%= locals.user.name%></h6>
+                                    <h6>User Name</h6>
+                                </a>
+                            </li>
+                            <li>
+                                <%= locals.user.bio%>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row d-flex justify-content-center">
+                    <div class="col-md-4">
+                        30 Posts
+                    </div>
+                    <div class="col-md-4">
+                        25 Friends
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul class="d-flex flex-column align-items-start">
+                            <li>
+                                <a href=""><i class="fas fa-hashtag me-1"></i>Explore</a>
+                            </li>
+                            <li>
+                                <a href=""><i class="fas fa-users me-1"></i>Friends</a>
+                            </li>
+                            <li>
+                                <a href=""><i class="fas fa-network-wired me-1"></i>Groups</a>
+                            </li>
+                            <li>
+                                <a href=""><i class="fas fa-user-plus me-1"></i>Friend Requests</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br>
+        <div class="row newcss">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul class="d-flex flex-column align-items-start">
+                            <li>
+                                Your Favourite
+                            </li>
+                            <li>
+                                Pages You Like
+                            </li>
+                            <li>
+                                Events
+                            </li>
+                            <li>
+                                Market Place
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <a href = "/users/signout">
+                        <button type="submit" class="btn btn-primary btn-lg main-post-btn">
+                            Sign Out
+                        </button>
+                           
+                    </a>
+                    </div>
+                </div>
+            </div>
+        </div>
   </div>
 
   <!-- post area begins here -->
-  <div class="col-md-5 second-col overflow-auto" >
+  <div class="col-md-4 second-col overflow-auto" >
         <!-- form to post begins here -->
         <div class="col-md-12">
             <%- include("_postform") -%>
@@ -30,10 +116,19 @@
   </div>
   <!-- post area ends -->
 
-  <div class="third-col align overflow-scroll">
+  <div class=" fourth-col overflow-auto">
+      <p>
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempore ullam eligendi vitae minima placeat laboriosam iusto tempora iste quia, ipsam voluptatum quis perspiciatis sequi harum perferendis eos animi omnis cum.
+          Qui ipsum impedit blanditiis recusandae quibusdam assumenda temporibus debitis? Voluptates voluptatibus hic nesciunt animi molestias recusandae, maiores architecto libero asperiores accusamus in optio molestiae veniam saepe et nostrum. Autem, officia.
+          Ratione tempore sequi rem magni ipsum facilis vero in culpa quaerat quis qui porro aspernatur enim debitis natus rerum ad fuga itaque provident veritatis, earum dolores. Porro magnam inventore ipsum.
+          Consequatur reprehenderit facilis iste ab laboriosam asperiores neque numquam optio quos blanditiis illo, nulla sunt cum maxime, dolore impedit esse voluptatem voluptatum eum delectus omnis, corporis facere deserunt? Fugit, magni.
+          Impedit voluptas dolor maiores eum vero aut cupiditate molestias facere quibusdam, quae natus earum hic recusandae officia? Illo suscipit laboriosam eius in architecto quaerat, exercitationem voluptate eveniet, quod dolores dicta.
+      </p>
+  </div>
+  <div class="third-col align overflow-scroll ">
         <!-- showing all the friends from the database starts here -->
         <% for(user of all_users) { %>
-            <div class="row align-items-center mt-2 mb-2">
+            <div class="row  align-items-center mt-2 mb-2">
                 <div class="col-md-2 align-self-center">
                     <img src="<%= user.avatar%>" class="rounded-circle" alt="Cinque Terre" width="50" height="50">
                 </div>
@@ -51,7 +146,9 @@
          <!-- showing all the friends from the database ends here -->
   </div>
 </div>
+
 <script src="/js/toggle_likes.js"></script>
 <script src= '/js/post_showComment.js'></script>
 <script src = '/js/post_form.js'></script>
+
 

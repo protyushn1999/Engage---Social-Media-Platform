@@ -18,7 +18,7 @@ let postForm = function () {
         let newPost = newPostDOM(post.data.post);
 
         $("#postArea").prepend(newPost);
-        deletePost($(" .dropdown-item", newPost));
+        deletePost($(" .dropdown-item-del", newPost));
 
         // call the create comment class method
         new PostComments(post.data.post._id);
@@ -64,52 +64,54 @@ let newPostDOM = function (post) {
                  </div>
              </div>
              <div class="col-md-2">
-                 <div class= "dropdown" >
-                         <button class="btn btn-secondary dropdown-toggle post-btn" type="button" data-bs-toggle="dropdown" >
-                             <i class="fas fa-ellipsis-h"></i>
-                         </button>
-                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                         <li><a class="dropdown-item delete-post-button" href="/users/posts/deletepost/${post._id}">Delete</a></li>
-                         </ul>
-                    </div>       
+             <a class="dropdown-item-del delete-post-button" href="/users/posts/deletepost/${post._id}"><i class="fas fa-trash-alt"> </i></a>
+             
+                     
              </div>
              <hr>
          </div>
  
          <div class="row">
-             <div class="col-md-12 p-1 text-start">
-                 <p class="p-4">${post.content}</p>
+             <div class="col-md-12 p-3 text-start">
+                 <p class="p-1">${post.content}</p>
              </div>
          </div> 
- 
-         <hr>
 
-         <div class=" row d-flex justify-content-center">
-             <div class="col-md-4">
-             
-                <a class="toggle-like-button" data-likes="0" href="/users/posts/likes/toggle/?id=${post._id}&type=post">
-                <span id = 'likeNo'>${post.likes.length}</span>
-                  Likes
+         
+         <div class="row">
+
+            <div class="col-md-12 d-flex">
+                <a class="toggle-like-button px-2" data-likes="0" href="/users/posts/likes/toggle/?id=${post._id}&type=post">
+                    <i class="fas fa-heart"> 
+                        
+                    </i> <span id = 'likeNo'>${post.likes.length}</span>
+                    Likes
+                    
                 </a>
-              </div>
-             <div class="col-md-4">
-                <button type="submit" class="btn btn-primary post-btn lcs">Share</button>
-             </div> 
-         </div>
+                <a class="toggle-like-button px-2" data-comments="0" href="/users/posts/likes/toggle/?id=${post.id}&type=post">
+                    <i class="fas fa-comments"> </i> <span id = 'commentNo'>${post.comments.length}</span>
+                     Comments
+                </a>
+            </div>
+        </div>
 
          <div class="post-comments row d-flex align-items-baseline ">
             <div class="col-md-2 ">
-                    <img src="${post.user.avatar}" class="rounded-circle" alt="Cinque Terre" width="50" height="50">
+                    <img src="${post.user.avatar}" class="rounded-circle" alt="Cinque Terre" width="40" height="40">
             </div>
             <div class="col-md-10">
                     <form id="post-${post._id}-comments-form" action="/users/posts/createcomment" method="POST" class ='d-flex align-items-center'>
-                    <textarea class="form-control feed-post" rows="1" name="content"  required placeholder="Write a comment.." style="border: none; background-color: #c3d3ea"></textarea>
+                    <textarea class="feed-post" rows="1" name="content"  required placeholder="Write a comment.." style="
+                    border: none;
+                    background-color: #2c3441;
+                    padding: 10px;"></textarea>
                     <input type="hidden" name="postId" value="${post._id}" >
-                    <button type = 'submit' class="btn btn-primary post-btn lcsnew">Comment</button>
+                    <button type = 'submit' class="btn btn-primary post-btn lcsnewer"><i class="fas fa-paper-plane"></i></button>
                   </form>     
             </div>
-          </div>
             <hr>
+          </div>
+           
 
           <div  id="post-comments-${post._id}" class="row post-comments-list align-items-center">
                 

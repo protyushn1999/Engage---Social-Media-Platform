@@ -1,31 +1,36 @@
 <% if(locals.user) { %>
-    <div class="row main-post noextramargin">
+    <div class="row main-post ">
         <div class="row noextramargin">
-            
+                <div class="d-flex pt-3">Update Your Activity</div>
                 <form action="/users/posts/createpost" method="POST" id = "postfeed">
-                    <div class="form-floating">
-                        <textarea class="form-control feed-post" name="feed_post" id="feed-post" style="
+                    <div class="form-floating d-flex align-items-center">
+                        <textarea class=" feed-post" name="feed_post" required placeholder="How are you feeling?" id="feed-post" style="
                         border: none;
-                        background-color: #c3d3ea"></textarea>
-                        <label for="floatingTextarea" style="
-                        color: #6c757d"> What's on your mind?</label>
-                      </div>
-                      <div class="col-12">
-                        <button type="submit" class="btn btn-primary btn-lg main-post-btn">Post</button>
+                        background-color: #2c3441;
+                        color: rgb(190, 190, 190);
+                        padding: 1em;
+                        height:5em;"></textarea>
+                        <!-- <label for="feed-post"class="form-label" style="margin-top:10px;padding:10px; color: rgba(92, 92, 92, 0.548);">How are you feeling?</label> -->
+                        <button type="submit" class="btn btn-primary btn-lg main-post-btn"><i class="fas fa-paper-plane"></i></button>
                       </div>
                 </form> 
         </div>
-        <div class="row noextramargin">
-            <div class="col">
+        <div class="row ">
+            <div class="col-md-12 d-flex justify-content-around align-items-center">
                 <button type="submit" class="btn btn-primary post-btn lcs">Live Video</button>
-            </div>
-            <div class="col">
                 <button type="submit" class="btn btn-primary post-btn lcs">Photo/Video</button>
-            </div>
-            <div class="col">
                 <button type="submit" class="btn btn-primary post-btn lcs">Feeling/Activity</button>
             </div>
-            
+            <!-- <div class="col-md-4">
+                <button type="submit" class="btn btn-primary post-btn lcs">Live Video</button>
+            </div>
+            <div class="col-md-4">
+                <button type="submit" class="btn btn-primary post-btn lcs">Photo/Video</button>
+            </div>
+            <div class="col-md-4">
+                <button type="submit" class="btn btn-primary post-btn lcs">Feeling/Activity</button>
+            </div>
+             -->
            
         </div>
        

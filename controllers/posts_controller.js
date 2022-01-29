@@ -59,10 +59,11 @@ module.exports.createcomment = async function(req,res) {
                 if (req.xhr){
                     // Similar for comments to fetch the user's id!
                     comment = await comment.populate('user', '-password');
-                    
+                    post = await post.populate('comments');
                     return res.status(200).json({
                         data: {
-                            comment: comment
+                            comment: comment,
+                            totalComments: post.comments.length
                         },
                         message: "Comment created!"
                     });
@@ -90,10 +91,11 @@ try {
             await commentDataBase.deleteMany({ post: req.params.id });
 
             if(req.xhr) { 
-                    
+                   
                     return res.status(200).json({
                         data: {
-                            post_id: req.params.id
+                            post_id: req.params.id,
+                            
                         },
                         message: 'Post Deleted Successfully'
                     });
@@ -124,10 +126,11 @@ module.exports.deletecomment = async function(req,res) {
             let post = await postDataBase.findByIdAndUpdate(postId, {$pull : {comment: req.params.id}});
 
             if(req.xhr) {
-                
+                post = await post.populate('comments'); 
                 return res.status(200).json({
                     data: {
-                        comment_id: req.params.id
+                        comment_id: req.params.id,
+                        totalComments: post.comments.length
                     },
                     message: 'Comment Deleted Successfully'
                 })

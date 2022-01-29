@@ -27,7 +27,9 @@ class PostComments{
                 data: $(self).serialize(),
                 success: function(data) {
                     console.log(data);
+                    console.log(data.data.totalComments);
                     let newComment = pSelf.newCommentDOM(data.data.comment);
+                    $('#commentNo').text(data.data.totalComments);
                     $(`#post-comments-${postId}`).prepend(newComment);
                     console.log("SUCESSS in showing the comment in the DOM");
                     pSelf.deleteComment($(' .dropdown-item-del', newComment));
@@ -52,7 +54,7 @@ class PostComments{
         return $(`
        <div class="row" id="comment-${comment._id}">
             <div class="col-md-2 align-items-center">
-                        <img src="${comment.user.avatar}" class="rounded-circle" alt="Cinque Terre" width="50" height="50">
+                        <img src="${comment.user.avatar}" class="rounded-circle" alt="Cinque Terre" width="40" height="40">
             </div>
 
             <div class="col-md-8 text-start"  id="comment-${comment._id}">
@@ -62,12 +64,7 @@ class PostComments{
 
             <div class="col-md-2">
                 <div class= "dropdown" >
-                <button class="btn btn-secondary dropdown-toggle post-btn" type="button" data-bs-toggle="dropdown" >
-                        <i class="fas fa-ellipsis-h"></i>
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item-del delete-comment-button" href="/users/posts/deletecomment/${comment._id}">Delete</a></li>
-                    </ul>
+                    <a class="dropdown-item-del delete-comment-button" href="/users/posts/deletecomment/${comment._id}"><i class="fas fa-trash-alt"> </i></a>
                 </div>     
             </div>
         </div>
@@ -84,7 +81,9 @@ class PostComments{
                 type: 'GET',
                 url: $(deleteLink).prop('href'),
                 success: function(data) {
+                    console.log(data.data.totalComments);
                     $(`#comment-${data.data.comment_id}`).remove();
+                    $('#commentNo').text(data.data.totalComments);
                     console.log("deleted the comment using ajax");
                     new Noty({
                         theme: 'sunset',

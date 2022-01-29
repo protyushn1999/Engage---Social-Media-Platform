@@ -1,0 +1,24 @@
+<!-- like and share buttton -->
+<div class=" row d-flex justify-content-center">
+    <div class="col-md-4">
+    
+       <a class="toggle-like-button" data-likes="0" href="/users/posts/likes/toggle/?id=${post._id}&type=post">
+       <span id = 'likeNo'>${post.likes.length}</span>
+         Likes
+       </a>
+     </div>
+    <div class="col-md-4">
+       <button type="submit" class="btn btn-primary post-btn lcs">Share</button>
+    </div> 
+</div>
+
+
+<!-- delete post button -->
+<div class= "dropdown" >
+    <button class="btn btn-secondary dropdown-toggle post-btn" type="button" data-bs-toggle="dropdown" >
+        <i class="fas fa-ellipsis-h"></i>
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+    <li><a class="dropdown-item delete-post-button" href="/users/posts/deletepost/${post._id}">Delete</a></li>
+    </ul>
+</div>
